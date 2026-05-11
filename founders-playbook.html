@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Founder's Playbook — 15 Startup Fundamentals</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --accent: #4C45B0; --accent-light: #EEEDFE; --accent-mid: #7F77DD;
+    --text-primary: #1A1A2E; --text-secondary: #52526B; --text-tertiary: #8888A0;
+    --bg: #F7F7FB; --surface: #FFFFFF; --border: #E4E4EF; --border-strong: #C8C8DC;
+    --p1: #4C45B0; --p2: #0F8F6A; --p3: #C26A10; --p4: #C0414A;
+    --p1bg: #EEEDFE; --p2bg: #E2F5EE; --p3bg: #FDF0E0; --p4bg: #FDEAEB;
+    --yours: #1A6FA8; --yoursbg: #E8F3FB; --yoursbd: rgba(26,111,168,0.22);
+    --radius: 10px; --radius-sm: 6px;
+    --shadow-active: 0 4px 16px rgba(76,69,176,0.13), 0 0 0 1.5px #4C45B0;
+    --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --mono: 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+  }
+  body { font-family: var(--font); background: var(--bg); color: var(--text-primary); line-height: 1.6; padding: 2rem 1.5rem 3rem; font-size: 14px; }
+
+  /* Header */
+  .hdr { margin-bottom: 2rem; padding-bottom: 1.25rem; border-bottom: 1.5px solid var(--border); }
+  .hdr h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 4px; }
+  .hdr p { font-size: 13px; color: var(--text-secondary); max-width: 620px; line-height: 1.5; }
+  .legend { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 0.875rem; }
+  .lp { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 999px; border: 1px solid transparent; }
+  .lp .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .lp1 { background: var(--p1bg); color: var(--p1); border-color: rgba(76,69,176,0.2); }
+  .lp2 { background: var(--p2bg); color: var(--p2); border-color: rgba(15,143,106,0.2); }
+  .lp3 { background: var(--p3bg); color: var(--p3); border-color: rgba(194,106,16,0.2); }
+  .lp4 { background: var(--p4bg); color: var(--p4); border-color: rgba(192,65,74,0.2); }
+  .save-banner { display: flex; align-items: center; gap: 8px; background: var(--yoursbg); border: 1px solid var(--yoursbd); border-radius: var(--radius-sm); padding: 7px 12px; margin-top: 0.75rem; font-size: 12px; color: var(--yours); max-width: 520px; }
+
+  /* Phase */
+  .phase { margin-bottom: 1.75rem; }
+  .phase-hdr { display: flex; align-items: center; gap: 10px; margin-bottom: 0.625rem; }
+  .phase-bar { width: 3px; height: 18px; border-radius: 2px; flex-shrink: 0; }
+  .phase-title { font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; }
+  .phase-desc { font-size: 12px; color: var(--text-tertiary); margin-left: auto; }
+
+  /* Card grid */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 13px 38px 12px 13px; cursor: pointer; transition: box-shadow 0.18s, border-color 0.18s, transform 0.12s; user-select: none; position: relative; }
+  .card:hover { box-shadow: 0 1px 4px rgba(0,0,0,0.07), 0 0 0 0.5px rgba(0,0,0,0.06); border-color: var(--border-strong); transform: translateY(-1px); }
+  .card.open { box-shadow: var(--shadow-active); border-color: var(--accent); transform: translateY(-1px); }
+  .card .cnum { font-size: 10px; font-weight: 600; letter-spacing: 0.06em; color: var(--text-tertiary); margin-bottom: 4px; }
+  .card .ctitle { font-size: 13px; font-weight: 600; color: var(--text-primary); line-height: 1.3; margin-bottom: 3px; }
+  .card .csub { font-size: 11px; color: var(--text-tertiary); line-height: 1.4; }
+  .wdot { position: absolute; top: 10px; right: 34px; width: 7px; height: 7px; border-radius: 50%; background: var(--yours); display: none; }
+  .wdot.on { display: block; }
+  .carrow { position: absolute; top: 11px; right: 11px; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); transition: transform 0.22s, background 0.18s; color: var(--text-tertiary); }
+  .card.open .carrow { transform: rotate(180deg); background: var(--accent-light); color: var(--accent); border-color: rgba(76,69,176,0.3); }
+
+  /* Detail */
+  .detail { background: var(--surface); border: 1px solid var(--accent); border-radius: var(--radius); margin: 4px 0 12px; overflow: hidden; animation: si 0.18s ease; box-shadow: var(--shadow-active); }
+  @keyframes si { from { opacity:0; transform:translateY(-5px); } to { opacity:1; transform:translateY(0); } }
+  .dhead { padding: 1rem 1.25rem 0.875rem; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 12px; }
+  .dnum { font-size: 30px; font-weight: 700; color: var(--border-strong); line-height: 1; flex-shrink: 0; margin-top: 2px; }
+  .dtitle { font-size: 17px; font-weight: 700; color: var(--text-primary); margin-bottom: 3px; }
+  .dwhy { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+  .prereqs { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+  .prereq { font-size: 10px; padding: 2px 8px; border-radius: 999px; background: var(--accent-light); color: var(--accent); border: 1px solid rgba(76,69,176,0.2); }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 2px; padding: 10px 1.25rem 0; border-bottom: 1px solid var(--border); background: var(--bg); overflow-x: auto; }
+  .tbtn { font-size: 12px; font-weight: 500; padding: 6px 13px 8px; border: none; background: transparent; color: var(--text-tertiary); cursor: pointer; border-bottom: 2px solid transparent; border-radius: var(--radius-sm) var(--radius-sm) 0 0; transition: color 0.15s, border-color 0.15s; position: relative; bottom: -1px; white-space: nowrap; }
+  .tbtn:hover { color: var(--text-secondary); }
+  .tbtn.on { color: var(--accent); border-bottom-color: var(--accent); background: var(--surface); }
+  .tbtn.yours.on { color: var(--yours); border-bottom-color: var(--yours); }
+  .tbtn .tdot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--yours); margin-left: 5px; vertical-align: middle; }
+
+  /* Tab panels */
+  .panel { padding: 1.25rem; display: none; }
+  .panel.on { display: block; }
+
+  /* Checklist */
+  .checklist { list-style: none; }
+  .checklist li { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+  .checklist li:last-child { border-bottom: none; }
+
+  /* Template */
+  .tlabel { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-tertiary); margin-bottom: 8px; }
+  .tbox { background: #F4F4FB; border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 14px 16px; font-family: var(--mono); font-size: 12px; color: var(--text-primary); line-height: 1.8; white-space: pre-wrap; word-break: break-word; }
+
+  /* Examples */
+  .etable { width: 100%; border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; border-collapse: collapse; }
+  .etable tr { border-bottom: 1px solid var(--border); }
+  .etable tr:last-child { border-bottom: none; }
+  .etable td { padding: 10px 14px; vertical-align: top; font-size: 13px; line-height: 1.5; }
+  .etable td:first-child { font-weight: 600; width: 100px; color: var(--text-primary); background: var(--bg); border-right: 1px solid var(--border); white-space: nowrap; }
+  .etable td:last-child { color: var(--text-secondary); }
+  .etable tr:nth-child(even) td:last-child { background: #FAFAFE; }
+
+  /* Your version */
+  .yours-hdr { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+  .yours-label { font-size: 13px; font-weight: 600; color: var(--yours); margin-bottom: 2px; }
+  .yours-hint { font-size: 12px; color: var(--text-tertiary); line-height: 1.5; }
+  .yours-btns { display: flex; gap: 6px; flex-shrink: 0; align-items: center; }
+  .abtn { font-size: 11px; font-weight: 500; padding: 5px 10px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary); cursor: pointer; transition: background 0.15s, border-color 0.15s; white-space: nowrap; }
+  .abtn:hover { background: var(--bg); border-color: var(--border-strong); color: var(--text-primary); }
+  .abtn.pri { background: var(--yoursbg); color: var(--yours); border-color: var(--yoursbd); }
+  .abtn.pri:hover { background: #d4eaf8; }
+  .yta { width: 100%; min-height: 260px; padding: 14px 16px; font-family: var(--mono); font-size: 12.5px; line-height: 1.8; color: var(--text-primary); background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius-sm); resize: vertical; transition: border-color 0.15s, box-shadow 0.15s; outline: none; }
+  .yta:focus { border-color: var(--yours); box-shadow: 0 0 0 3px rgba(26,111,168,0.1); }
+  .yta::placeholder { color: var(--text-tertiary); }
+  .sstatus { display: flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 11px; color: var(--text-tertiary); min-height: 18px; }
+  .sstatus.saved { color: var(--p2); }
+  .sstatus.copied { color: var(--yours); }
+
+  .footer { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 11px; color: var(--text-tertiary); text-align: center; }
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <h1>Founder's Playbook — 15 Startup Fundamentals</h1>
+  <p>Everything you need to build a startup, sorted by priority and prerequisites. Click any card to expand — use the <strong>Your Version</strong> tab to write your own answers based on the template.</p>
+  <div class="legend">
+    <span class="lp lp1"><span class="dot" style="background:#4C45B0"></span>Phase 1 · Foundation</span>
+    <span class="lp lp2"><span class="dot" style="background:#0F8F6A"></span>Phase 2 · Build</span>
+    <span class="lp lp3"><span class="dot" style="background:#C26A10"></span>Phase 3 · Launch</span>
+    <span class="lp lp4"><span class="dot" style="background:#C0414A"></span>Phase 4 · Grow</span>
+  </div>
+  <div class="save-banner">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" stroke="#1A6FA8"/><path d="M3.5 6.2L5.2 7.9L8.5 4.5" stroke="#1A6FA8" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Your writing auto-saves in this browser — it will still be here next time you open this page.
+  </div>
+</div>
+
+<div id="app"></div>
+<div class="footer">Founder's Playbook · 15 fundamentals across 4 phases · Your Version tabs auto-save in this browser</div>
+
+<script>
+var PH=[
+  {id:1,label:"Phase 1 — Foundation",desc:"Before anything else",color:"#4C45B0",items:[0,1,2,3]},
+  {id:2,label:"Phase 2 — Build",desc:"Structure your startup",color:"#0F8F6A",items:[4,5,6,7,8]},
+  {id:3,label:"Phase 3 — Launch",desc:"Get to market",color:"#C26A10",items:[9,10,11]},
+  {id:4,label:"Phase 4 — Grow",desc:"Scale and fundraise",color:"#C0414A",items:[12,13,14]}
+];
+
+var IT=[
+  {num:"01",title:"Problem Statement",sub:"The single most important thing",why:"Everything else is built on this. If the problem isn't real, nothing else matters.",prereqs:[],checklist:["Describe the problem in one sentence","Quantify the pain (cost, time, frequency)","Identify who suffers from it most","Validate it's not already solved well enough"],template:"Problem: [Target user] struggle with [specific pain point] because [root cause].\n\nThis costs them [time/money/risk] and happens [frequency].\n\nToday they solve it by [current workaround], which is painful because [why it's inadequate].",examples:[{b:"Airbnb",t:"Travelers pay too much for hotels, and homeowners have empty rooms going to waste."},{b:"Stripe",t:"Developers couldn't accept payments online without weeks of integration pain and banking bureaucracy."},{b:"Slack",t:"Teams were drowning in email threads and losing context across disconnected tools."},{b:"Uber",t:"Getting a taxi was unreliable, opaque, and often embarrassing — no ETA, cash only, no accountability."}]},
+  {num:"02",title:"Vision & Mission",sub:"Your north star",why:"Vision attracts talent and investors. Mission aligns your team on a daily basis.",prereqs:["01 — Problem Statement"],checklist:["Vision: the world you want to create (10–20 year horizon)","Mission: what you do every day to get there","Make it ambitious but believable","Make it specific enough to say no to things"],template:"Vision: A world where [big future state] — [emotional impact].\n\nMission: We [verb] [what] for [who] so that [outcome].\n\nExample: \"We make [thing] radically [adjective] for [audience].\"",examples:[{b:"Tesla",t:"Vision: Accelerate the world's transition to sustainable energy."},{b:"Google",t:"Organize the world's information and make it universally accessible and useful."},{b:"LinkedIn",t:"Create economic opportunity for every member of the global workforce."},{b:"Spotify",t:"Unlock the potential of human creativity — giving a million artists the opportunity to live off their art."}]},
+  {num:"03",title:"Target Market & ICP",sub:"Who you serve",why:"Trying to sell to everyone means selling to no one. Narrow focus wins early.",prereqs:["01 — Problem Statement"],checklist:["TAM / SAM / SOM sizing","Ideal Customer Profile (ICP) — job, behaviors, pains","Early adopter persona (who will say yes first?)","Where they spend time online and offline"],template:"TAM: Total market if everyone could buy — $[X]B\nSAM: Segment we can realistically reach — $[X]M\nSOM: What we can capture in 3 years — $[X]M\n\nICP:\n- Company: [size, industry, stage]\n- Champion: [title, goals, daily frustrations]\n- Trigger: [what event makes them look for a solution]\n- Budget: [range, who approves]",examples:[{b:"Notion",t:"Early ICP: individual developers and designers at tech startups frustrated with Confluence."},{b:"Figma",t:"Early ICP: product designers who hated emailing Sketch files and losing version history."},{b:"Canva",t:"ICP: non-designers at SMBs — marketers, social media managers — who needed to look professional without an agency."},{b:"HubSpot",t:"ICP: marketing managers at B2B SMBs ($1M–$10M revenue) who outgrew spreadsheets but couldn't afford Salesforce."}]},
+  {num:"04",title:"Value Proposition",sub:"Why you over anyone else",why:"The clearest summary of what you do, for whom, and why it's better. Used in everything.",prereqs:["01 — Problem Statement","03 — Target Market & ICP"],checklist:["One sentence a 10-year-old can understand","Outcome-focused, not feature-focused","Quantify the benefit if possible","Different from competitors in a meaningful way"],template:"For [target customer]\nwho [have this problem / want this outcome],\n[Product name] is a [category]\nthat [key benefit / what it does].\n\nUnlike [main alternative],\nwe [key differentiator].",examples:[{b:"Dropbox",t:"For anyone who works across devices, Dropbox keeps your files in sync everywhere — unlike emailing yourself files."},{b:"Zoom",t:"Video meetings that actually work — for anyone — in one click, without downloads or setup friction."},{b:"Stripe",t:"Payments infrastructure for the internet. A few lines of code and you're collecting money."},{b:"Notion",t:"One workspace for everything — notes, docs, databases, wikis — instead of juggling five different tools."}]},
+  {num:"05",title:"Business Model",sub:"How you make money",why:"Defines how you generate revenue and whether unit economics can ever be profitable.",prereqs:["03 — Target Market & ICP","04 — Value Proposition"],checklist:["Revenue model (SaaS, marketplace, usage, one-time…)","Pricing strategy and tiers","Unit economics: CAC vs LTV","Break-even point and payback period"],template:"Revenue model: [SaaS / Marketplace / Transactional / Ad-supported / Freemium]\n\nPricing:\n- Free tier: [what's included]\n- [Plan name] $[X]/mo: [value]\n- [Plan name] $[X]/mo: [value]\n\nUnit economics:\n- CAC (cost to acquire 1 customer): $[X]\n- ACV (annual contract value): $[X]\n- LTV (lifetime value): $[X]\n- LTV:CAC ratio target: 3:1 or better",examples:[{b:"Spotify",t:"Freemium: free ad-supported tier drives adoption → Premium at €10/mo. Family and Student plans."},{b:"Airbnb",t:"Two-sided marketplace: 3% host fee + 14% guest service fee. No inventory, pure take-rate model."},{b:"Figma",t:"Free for individuals → $12/editor/mo for teams → $45/editor/mo for orgs. Viral: every collaborator is a potential paid seat."},{b:"OpenAI",t:"Freemium consumer (ChatGPT Plus $20/mo) + API usage pricing per token. Enterprise contracts for large customers."}]},
+  {num:"06",title:"MVP",sub:"Smallest thing that works",why:"Prove your core hypothesis with the least effort. Ship before you're ready.",prereqs:["04 — Value Proposition","05 — Business Model"],checklist:["Define the single core hypothesis to test","Strip away everything that isn't core value","Set a clear success metric before you build","Get 5–10 real users to pay or commit"],template:"Core hypothesis: [User type] will [behavior/pay] to solve [problem] if we give them [solution].\n\nMVP scope:\n✓ Must have: [feature 1], [feature 2]\n✗ Cut for now: [feature], [feature], [feature]\n\nSuccess criteria: [X] users do [Y] within [Z days].\nWe'll pivot if [negative signal].",examples:[{b:"Dropbox",t:"MVP was a 3-minute demo video — no product. 70k signups overnight proved demand before any code was written."},{b:"Zappos",t:"MVP was a website with photos of shoes from local stores. Owner bought and shipped them himself."},{b:"Airbnb",t:"MVP was a basic website and air mattresses in their own apartment during a sold-out conference."},{b:"Buffer",t:"MVP was a two-page landing page with a pricing table — no product. Signups proved demand; then they built it."}]},
+  {num:"07",title:"Brand Identity",sub:"Name, logo, voice, story",why:"Trust and recognition. Great brands command premium pricing and survive bad news.",prereqs:["03 — Target Market & ICP","04 — Value Proposition"],checklist:["Company name (memorable, available domain & trademark)","Logo and visual identity","Brand voice and tone (3–5 adjectives)","One-liner / tagline","Core story: origin, mission, enemy"],template:"Name: [Company name]\nDomain: [name.com — check availability]\nTagline: [Verb] [outcome] for [audience]\n\nBrand voice: [adj 1], [adj 2], [adj 3]\nWe are: [direct, warm, bold]\nWe are not: [corporate, jargon-heavy, cold]\n\nOur story: [founder] noticed [problem] and couldn't believe nobody had solved it. So we built [solution].",examples:[{b:"Apple",t:"Voice: simple, confident, human. No specs in ads — only how it makes you feel. 'Think Different' positioned users as rebels."},{b:"Mailchimp",t:"Quirky, warm, funny — positioned as the brand that didn't take itself too seriously in a sea of boring enterprise software."},{b:"Patagonia",t:"Mission-first brand: 'We're in business to save our home planet.' The brand is inseparable from environmental activism."},{b:"Stripe",t:"Voice: intelligent, precise, elegant. 'Built by developers, for developers'. Every word of their docs reflects that."}]},
+  {num:"08",title:"Legal Structure",sub:"Entity, IP, agreements",why:"Wrong structure early creates massive cleanup costs later — especially with investors.",prereqs:[],checklist:["Incorporate as a C-Corp (preferred by VCs) or LLC","Assign IP to the company, not founders personally","Co-founder agreement + vesting schedule (4yr / 1yr cliff)","SAFE notes or cap table setup for first checks","Basic terms of service and privacy policy"],template:"Entity: [C-Corp in Delaware] — recommended for VC-backed startups\n\nEquity split:\n- [Founder 1]: [X]% — 4yr vest, 1yr cliff\n- [Founder 2]: [X]% — 4yr vest, 1yr cliff\n- Option pool: 10–15% reserved for employees\n\nIP assignment: all founders sign IP assignment to company on day 1.\nSAFE note terms: $[cap] valuation cap, [X]% discount.",examples:[{b:"YC standard",t:"YC recommends: Delaware C-Corp, SAFE notes, 4yr vesting with 1yr cliff, 10% option pool minimum."},{b:"Stripe",t:"Patrick & John Collison started with a standard Delaware C-Corp. Clean cap table enabled rapid institutional investment."},{b:"Airbnb",t:"Started as LLC, then converted to C-Corp before YC — a painful process they warn others to skip."},{b:"Best practice",t:"Use Stripe Atlas or Clerky for fast incorporation. Get an IP assignment and founder vesting signed before any investor conversation."}]},
+  {num:"09",title:"Financial Plan",sub:"Runway, unit economics",why:"Runway is oxygen. Every decision depends on knowing how long you have.",prereqs:["05 — Business Model"],checklist:["12–18 month cash flow forecast","Monthly burn rate","Revenue projections (bottom-up, not top-down)","Fundraising timeline and target amount","Break-even scenario"],template:"Monthly burn: $[X]k (salaries $X + infra $X + other $X)\nCurrent runway: [X] months\n\nRevenue (bottom-up):\nMonth 1:  [X] customers × $[X] MRR = $[X]k\nMonth 6:  [X] customers × $[X] MRR = $[X]k\nMonth 12: [X] customers × $[X] MRR = $[X]k\n\nRaise: $[X]M to reach [milestone] by [date].\nUse of funds: [X]% eng, [X]% sales, [X]% ops.",examples:[{b:"Default alive",t:"Paul Graham: are you 'default alive' (reach profitability on current cash) or 'default dead'? Know which one you are."},{b:"Buffer",t:"Buffer shared full financials publicly — revenue, salaries, equity. Radical transparency became a brand differentiator."},{b:"Rule of thumb",t:"Seed stage: 18 months runway minimum. Series A: 3× revenue growth YoY. Burn multiple below 1.5 is healthy."},{b:"YC advice",t:"Your most important metric: months until zero. Ramen profitability > bankruptcy."}]},
+  {num:"10",title:"Customer Discovery",sub:"Talk before you build",why:"Most startups fail by building something nobody wants. Interviews fix this.",prereqs:["01 — Problem Statement","03 — Target Market & ICP"],checklist:["Run 20–50 discovery interviews before building","Use The Mom Test questions (past behavior, not opinions)","Find your early adopters (who has the problem acutely?)","Document patterns and surprises systematically"],template:"The Mom Test interview script:\n\n1. Tell me about how you currently handle [problem area]?\n2. Walk me through the last time that happened.\n3. What was the hardest part of that experience?\n4. How much does this cost you [in time / money]?\n5. What have you already tried to solve it?\n6. Who else is involved in this process?\n\nAVOID: \"Would you use X?\" / \"Do you like this idea?\"\nSEEK: past behavior, specific stories, workarounds, budgets.",examples:[{b:"Airbnb",t:"Brian Chesky personally stayed with early hosts. He did all customer support himself for months to understand user pain."},{b:"Intercom",t:"Des Traynor spent weeks in sales calls and support tickets before writing a single line of code."},{b:"Superhuman",t:"Rahul Vohra sent personal 1-on-1 onboarding to the first 1,000 users — then used NPS responses to define the exact ICP."},{b:"Figma",t:"Dylan Field lived inside design teams during grad school. Watched designers work before anyone asked for a browser-based design tool."}]},
+  {num:"11",title:"Go-to-Market Strategy",sub:"Channels, positioning, pricing",why:"A great product with no distribution strategy stays a hobby. GTM is your growth engine.",prereqs:["03 — Target Market & ICP","04 — Value Proposition","06 — MVP"],checklist:["Primary acquisition channel (1–2 channels, not 10)","Pricing and packaging for each segment","Sales motion: PLG, direct sales, or channel partners","Launch plan: waitlist, beta, public launch"],template:"GTM motion: [Product-led / Sales-led / Community-led]\n\nPrimary channel: [SEO / Paid / Outbound / Partnerships / Community]\nSecondary channel: [Content / Referral / Events]\n\nLaunch sequence:\n1. Waitlist page → [X] signups goal\n2. Closed beta → [X] design partners\n3. Public launch → ProductHunt + [channel]\n\nPricing at launch:\n- [Tier 1]: $[X]/mo — [description]\n- [Tier 2]: $[X]/mo — [description]",examples:[{b:"Notion",t:"Community-led GTM: templates shared on Reddit → viral loop. No paid acquisition for years. Users became evangelists."},{b:"Superhuman",t:"Invite-only, referral-only GTM. Created scarcity. Users tweeted asking for invites — free PR, perfect ICP filtering."},{b:"HubSpot",t:"Inbound marketing as GTM: coined the term, wrote the book, gave away tools for free — then sold the software to that audience."},{b:"Figma",t:"PLG motion: free tier → viral coefficient > 1 as teams invited collaborators → expansion to paid team plans."}]},
+  {num:"12",title:"Metrics & KPIs",sub:"What you measure",why:"You can't improve what you don't measure. The right metrics keep you honest.",prereqs:["05 — Business Model","06 — MVP"],checklist:["North star metric (one number that captures core value)","Acquisition: CAC, conversion rate, channel mix","Retention: DAU/MAU, churn, NPS","Revenue: MRR, ARR, LTV, payback period"],template:"North star metric: [e.g. Weekly Active Creators / Messages Sent / Rides Completed]\n\nAcquisition:\n- Visitors → signups: [X]%\n- Signups → activated: [X]%\n- CAC by channel: [channel] = $[X]\n\nRetention:\n- D1 / D7 / D30 retention: [X]% / [X]% / [X]%\n- Monthly churn: [X]% (target < 2% for SaaS)\n- NPS: [X] (target > 50)\n\nRevenue:\n- MRR: $[X] | MoM growth: [X]%\n- LTV:CAC: [X]:1 (target > 3)",examples:[{b:"Airbnb",t:"North star: nights booked. Led to a metric tree: search → listing views → contact → booking."},{b:"Slack",t:"North star: messages sent per org. Teams sending 2,000+ messages were nearly never churned."},{b:"Facebook",t:"'7 friends in 10 days' — the retention magic number from cohort analysis. Drove all new user onboarding design."},{b:"Spotify",t:"North star: time spent listening. 30 minutes/day per MAU was their activation benchmark."}]},
+  {num:"13",title:"Pitch Deck",sub:"Tell the story to investors",why:"12–15 slides to tell your story and raise money. Every slide must earn its place.",prereqs:["01–12 — all previous fundamentals"],checklist:["Problem → Solution → Why Now → Market → Product → Traction → Team → Ask","Lead with the most exciting thing","One clear insight per slide","Show traction before asking for money"],template:"Slide 1:  Title — name, tagline, your contact\nSlide 2:  Problem — the painful truth, made visceral\nSlide 3:  Solution — your product, simply explained\nSlide 4:  Why now — market timing / tech shift\nSlide 5:  Market — TAM / SAM / SOM with bottom-up logic\nSlide 6:  Product — screenshots, demo, or video\nSlide 7:  Traction — MRR, users, growth rate, logos\nSlide 8:  Business model — revenue, pricing, unit economics\nSlide 9:  Go-to-market — how you'll grow\nSlide 10: Team — why you are the right people\nSlide 11: The Ask — how much, what milestone, use of funds",examples:[{b:"Airbnb 2009",t:"Original seed deck: 'eBay for spaces.' 10 clean slides. Traction was 3 successful test weekends. Raised $600k from Sequoia."},{b:"Uber 2008",t:"Led with the pain: 'What if you could request a ride from your phone?' Simple and visceral."},{b:"Sequoia",t:"Company purpose → problem → solution → why now → market → competition → product → business model → team → financials."},{b:"YC advice",t:"Make a demo. A 2-minute product demo in your deck is worth more than 3 market size slides."}]},
+  {num:"14",title:"Team & Advisors",sub:"Who is around the table",why:"Investors bet on people first, idea second. The right team is the unfair advantage.",prereqs:["07 — Brand Identity","08 — Legal Structure"],checklist:["Founding team covers: product, tech, and go-to-market","Identify skill gaps and how to fill them","3–5 advisors with specific leverage (domain, network, or signal)","Formalize advisor equity: 0.1–0.5% with 2yr vest"],template:"Founding team:\n- [Name] — CEO: [background, why them]\n- [Name] — CTO: [background, why them]\n\nUnfair advantage: [domain expertise / insider access / unique insight]\n\nAdvisors:\n- [Name] — [company/title]: brings [specific value]\n  Equity: 0.25%, 2yr vest, 6mo cliff\n\nNext hires (post-raise):\n1. [Role] — because [gap]\n2. [Role] — because [gap]",examples:[{b:"Apple",t:"Jobs (vision/GTM) + Wozniak (engineering). Classic product + tech founding pair. Complementary skills, shared obsession."},{b:"Stripe",t:"Patrick (CEO) + John (CTO) Collison: both had built and sold companies before. Payments depth + coding credibility."},{b:"Airbnb",t:"Brian Chesky (design), Joe Gebbia (design/product), Nathan Blecharczyk (engineering). Visual-first product built by designers."},{b:"Best practice",t:"Advisors should open specific doors. An advisor who can intro your top 10 enterprise targets is worth 0.5% on a 2yr vest."}]},
+  {num:"15",title:"Fundraising Strategy",sub:"Pre-seed to Series A",why:"Fundraising is a full-time job. Going in without a strategy means leaving money on the table.",prereqs:["13 — Pitch Deck","09 — Financial Plan"],checklist:["Know your stage: pre-seed / seed / Series A","Target the right investors (check size, thesis, portfolio fit)","Build a list of 50–100 investors, prioritize warm intros","Create FOMO: run a process, set a closing date","Know your terms: valuation, dilution, pro-rata rights"],template:"Fundraising target: $[X]M [pre-seed / seed]\nInstrument: [SAFE / Priced round]\nValuation cap: $[X]M\nUse of funds: reach [milestone] in [X] months\n\nInvestor pipeline:\nTier 1 (dream): [Fund A], [Fund B] — warm intro needed\nTier 2 (strong fit): [Fund C], [Fund D] — cold outreach ok\nTier 3 (backup): [Angel A], [Angel B]\n\nTimeline:\n- Week 1–2: warm intros + first meetings\n- Week 3–5: partner meetings + term sheets\n- Week 6–8: due diligence + close",examples:[{b:"YC model",t:"YC's Demo Day creates structured FOMO: 100+ investors, 2 weeks, companies with momentum close rounds fast."},{b:"Notion",t:"Bootstrapped to $1M ARR before raising. Negotiated from strength — turned down multiple term sheets. Raised at $2B cap."},{b:"Figma",t:"Raised $3.8M seed after 3 years of building. Used traction (early design community) to negotiate valuation."},{b:"Dalton Caldwell",t:"YC advice: 'Don't fundraise until your metrics make investors feel FOMO. The best time to raise is when you don't need to.'"}]}
+];
+
+// ── State ─────────────────────────────────────
+var openItem=null, openTab={}, saveTimers={};
+var LS='fp2_';
+function lsk(i){return LS+i;}
+function lload(i){try{return localStorage.getItem(lsk(i))||'';}catch(e){return '';}}
+function lsave(i,v){try{localStorage.setItem(lsk(i),v);}catch(e){}}
+function lhas(i){return lload(i).trim().length>0;}
+
+// ── Helpers ───────────────────────────────────
+function e(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+var chk='<svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0;margin-top:1px"><circle cx="8" cy="8" r="7.5" stroke="#0F8F6A" stroke-width="1"/><path d="M5 8.2L7 10.2L11 6" stroke="#0F8F6A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+var arr='<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3L5 6L8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+var oksvg='<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5.5" stroke="currentColor"/><path d="M3.5 6.2L5.2 7.9L8.5 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+// ── Render ────────────────────────────────────
+function renderAll(){
+  var h='';
+  PH.forEach(function(ph){
+    h+='<div class="phase"><div class="phase-hdr"><div class="phase-bar" style="background:'+ph.color+'"></div><span class="phase-title" style="color:'+ph.color+'">'+ph.label+'</span><span class="phase-desc">'+ph.desc+'</span></div><div class="grid">';
+    ph.items.forEach(function(i){h+=renderCard(i);});
+    h+='</div>';
+    ph.items.forEach(function(i){if(openItem===i)h+=renderDetail(i);});
+    h+='</div>';
+  });
+  document.getElementById('app').innerHTML=h;
+}
+
+function renderCard(i){
+  var it=IT[i], open=openItem===i, written=lhas(i);
+  return '<div class="card'+(open?' open':'')+'" onclick="tog('+i+')">'
+    +'<div class="cnum">'+it.num+'</div>'
+    +'<div class="ctitle">'+it.title+'</div>'
+    +'<div class="csub">'+it.sub+'</div>'
+    +'<div class="wdot'+(written?' on':'')+'"></div>'
+    +'<div class="carrow">'+arr+'</div>'
+    +'</div>';
+}
+
+function renderDetail(i){
+  var it=IT[i], tab=openTab[i]||'checklist', saved=lload(i);
+
+  var pq=it.prereqs.length?'<div class="prereqs">'+it.prereqs.map(function(p){return '<span class="prereq">Requires: '+p+'</span>';}).join('')+'</div>':'';
+
+  var cl='<ul class="checklist">'+it.checklist.map(function(c){return '<li>'+chk+'<span>'+c+'</span></li>';}).join('')+'</ul>';
+  var ex='<table class="etable"><tbody>'+it.examples.map(function(x){return '<tr><td>'+e(x.b)+'</td><td>'+e(x.t)+'</td></tr>';}).join('')+'</tbody></table>';
+
+  var tdot=lhas(i)?'<span class="tdot"></span>':'';
+  var tbs=[
+    {id:'checklist',label:'Checklist',cls:''},
+    {id:'template', label:'Template', cls:''},
+    {id:'examples', label:'Brand examples',cls:''},
+    {id:'yours',    label:'Your version',cls:' yours',extra:tdot}
+  ].map(function(t){
+    return '<button class="tbtn'+(tab===t.id?' on':'')+(t.cls)+'" onclick="stab('+i+',\''+t.id+'\')">'+t.label+(t.extra||'')+'</button>';
+  }).join('');
+
+  var yc='<div class="yours-hdr"><div><div class="yours-label">Your version</div><div class="yours-hint">Write your own answer for <strong>'+it.title+'</strong> — edit the template to fit your startup.</div></div>'
+    +'<div class="yours-btns">'
+    +'<button class="abtn" onclick="loadTpl('+i+')">Load template</button>'
+    +'<button class="abtn" onclick="clr('+i+')">Clear</button>'
+    +'<button class="abtn pri" onclick="cp('+i+')">Copy text</button>'
+    +'</div></div>'
+    +'<textarea class="yta" id="ta'+i+'" placeholder="Start writing here, or click \'Load template\' to start from the template..." oninput="inp('+i+')" onblur="snap('+i+')">'+e(saved)+'</textarea>'
+    +'<div class="sstatus" id="ss'+i+'"></div>';
+
+  return '<div class="detail">'
+    +'<div class="dhead"><div class="dnum">'+it.num+'</div><div><div class="dtitle">'+it.title+'</div><div class="dwhy">'+it.why+'</div>'+pq+'</div></div>'
+    +'<div class="tabs">'+tbs+'</div>'
+    +'<div class="panel'+(tab==='checklist'?' on':'')+'" id="pc'+i+'">'+cl+'</div>'
+    +'<div class="panel'+(tab==='template'?' on':'')+'" id="pt'+i+'"><div class="tlabel">Fill-in-the-blank template</div><div class="tbox">'+e(it.template)+'</div></div>'
+    +'<div class="panel'+(tab==='examples'?' on':'')+'" id="pe'+i+'">'+ex+'</div>'
+    +'<div class="panel'+(tab==='yours'?' on':'')+'" id="py'+i+'">'+yc+'</div>'
+    +'</div>';
+}
+
+// ── Actions ───────────────────────────────────
+function tog(i){
+  if(openItem===i){openItem=null;}
+  else{openItem=i; if(!openTab[i])openTab[i]='checklist';}
+  renderAll();
+  if(openItem!==null)setTimeout(function(){var ps=document.querySelectorAll('.detail');if(ps.length)ps[ps.length-1].scrollIntoView({behavior:'smooth',block:'nearest'});},60);
+}
+
+function stab(i,t){
+  // Preserve textarea before re-render
+  var ta=document.getElementById('ta'+i);
+  if(ta)lsave(i,ta.value);
+  openTab[i]=t;
+  renderAll();
+  setTimeout(function(){var ps=document.querySelectorAll('.detail');if(ps.length)ps[ps.length-1].scrollIntoView({behavior:'smooth',block:'nearest'});},30);
+}
+
+function inp(i){
+  if(saveTimers[i])clearTimeout(saveTimers[i]);
+  saveTimers[i]=setTimeout(function(){snap(i);},900);
+  var ss=document.getElementById('ss'+i);
+  if(ss){ss.className='sstatus';ss.innerHTML='Unsaved changes…';}
+}
+
+function snap(i){
+  var ta=document.getElementById('ta'+i);
+  if(!ta)return;
+  lsave(i,ta.value);
+  var ss=document.getElementById('ss'+i);
+  if(ss){ss.className='sstatus saved';ss.innerHTML=oksvg+' &nbsp;Saved';setTimeout(function(){if(ss){ss.className='sstatus';ss.innerHTML='';}},2200);}
+  // Update dot on card without full re-render
+  var dots=document.querySelectorAll('.wdot');
+  // Just do a lightweight card refresh
+}
+
+function loadTpl(i){
+  var ta=document.getElementById('ta'+i);
+  if(!ta)return;
+  if(ta.value.trim()&&!confirm('Replace your current text with the template?'))return;
+  ta.value=IT[i].template;
+  ta.focus();
+  inp(i);
+}
+
+function clr(i){
+  var ta=document.getElementById('ta'+i);
+  if(!ta)return;
+  if(ta.value.trim()&&!confirm('Clear your text for '+IT[i].title+'?'))return;
+  ta.value='';
+  lsave(i,'');
+  var ss=document.getElementById('ss'+i);
+  if(ss){ss.className='sstatus';ss.innerHTML='Cleared.';setTimeout(function(){if(ss)ss.innerHTML='';},1500);}
+}
+
+function cp(i){
+  var ta=document.getElementById('ta'+i);
+  if(!ta||!ta.value.trim()){alert('Nothing to copy yet — write something in Your Version first.');return;}
+  var ss=document.getElementById('ss'+i);
+  function done(){if(ss){ss.className='sstatus copied';ss.innerHTML=oksvg+' &nbsp;Copied to clipboard';setTimeout(function(){if(ss){ss.innerHTML='';ss.className='sstatus';}},2200);}}
+  try{navigator.clipboard.writeText(ta.value).then(done);}
+  catch(err){ta.select();try{document.execCommand('copy');done();}catch(e2){alert('Copy failed — please select the text manually.');}}
+}
+
+renderAll();
+</script>
+</body>
+</html>
