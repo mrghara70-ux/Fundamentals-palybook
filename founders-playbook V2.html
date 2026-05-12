@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Founder's Playbook — 25 Startup Fundamentals</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --accent:#4C45B0;--accent-light:#EEEDFE;
+  --text-primary:#1A1A2E;--text-secondary:#52526B;--text-tertiary:#8888A0;
+  --bg:#F7F7FB;--surface:#FFFFFF;--border:#E4E4EF;--border-strong:#C8C8DC;
+  --p1:#4C45B0;--p2:#0F8F6A;--p3:#C26A10;--p4:#C0414A;
+  --p1bg:#EEEDFE;--p2bg:#E2F5EE;--p3bg:#FDF0E0;--p4bg:#FDEAEB;
+  --yours:#1A6FA8;--yoursbg:#E8F3FB;--yoursbd:rgba(26,111,168,0.22);
+  --new:#7C3AED;--newbg:#F3EEFF;--newbd:rgba(124,58,237,0.2);
+  --radius:10px;--radius-sm:6px;
+  --shadow-active:0 4px 16px rgba(76,69,176,0.13),0 0 0 1.5px #4C45B0;
+  --font:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;
+  --mono:'SF Mono','Fira Code','Cascadia Code',Consolas,monospace;
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text-primary);line-height:1.6;padding:2rem 1.5rem 3rem;font-size:14px}
+.hdr{margin-bottom:2rem;padding-bottom:1.25rem;border-bottom:1.5px solid var(--border)}
+.hdr h1{font-size:22px;font-weight:700;letter-spacing:-0.3px;margin-bottom:4px}
+.hdr p{font-size:13px;color:var(--text-secondary);max-width:640px;line-height:1.5}
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin-top:.875rem}
+.lp{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;padding:4px 10px;border-radius:999px;border:1px solid transparent}
+.lp .dot{width:7px;height:7px;border-radius:50%}
+.lp1{background:var(--p1bg);color:var(--p1);border-color:rgba(76,69,176,.2)}
+.lp2{background:var(--p2bg);color:var(--p2);border-color:rgba(15,143,106,.2)}
+.lp3{background:var(--p3bg);color:var(--p3);border-color:rgba(194,106,16,.2)}
+.lp4{background:var(--p4bg);color:var(--p4);border-color:rgba(192,65,74,.2)}
+.lpnew{background:var(--newbg);color:var(--new);border-color:var(--newbd)}
+.save-banner{display:flex;align-items:center;gap:8px;background:var(--yoursbg);border:1px solid var(--yoursbd);border-radius:var(--radius-sm);padding:7px 12px;margin-top:.75rem;font-size:12px;color:var(--yours);max-width:520px}
+.phase{margin-bottom:1.75rem}
+.phase-hdr{display:flex;align-items:center;gap:10px;margin-bottom:.625rem}
+.phase-bar{width:3px;height:18px;border-radius:2px;flex-shrink:0}
+.phase-title{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase}
+.phase-desc{font-size:12px;color:var(--text-tertiary);margin-left:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:8px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:13px 38px 12px 13px;cursor:pointer;transition:box-shadow .18s,border-color .18s,transform .12s;user-select:none;position:relative}
+.card:hover{box-shadow:0 1px 4px rgba(0,0,0,.07),0 0 0 .5px rgba(0,0,0,.06);border-color:var(--border-strong);transform:translateY(-1px)}
+.card.open{box-shadow:var(--shadow-active);border-color:var(--accent);transform:translateY(-1px)}
+.card .cnum{font-size:10px;font-weight:600;letter-spacing:.06em;color:var(--text-tertiary);margin-bottom:4px}
+.card .ctitle{font-size:13px;font-weight:600;color:var(--text-primary);line-height:1.3;margin-bottom:3px}
+.card .csub{font-size:11px;color:var(--text-tertiary);line-height:1.4}
+.new-badge{display:inline-block;font-size:9px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:1px 5px;border-radius:3px;background:var(--newbg);color:var(--new);border:1px solid var(--newbd);margin-top:4px}
+.wdot{position:absolute;top:10px;right:34px;width:7px;height:7px;border-radius:50%;background:var(--yours);display:none}
+.wdot.on{display:block}
+.carrow{position:absolute;top:11px;right:11px;width:20px;height:20px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--bg);border:1px solid var(--border);transition:transform .22s,background .18s;color:var(--text-tertiary)}
+.card.open .carrow{transform:rotate(180deg);background:var(--accent-light);color:var(--accent);border-color:rgba(76,69,176,.3)}
+.detail{background:var(--surface);border:1px solid var(--accent);border-radius:var(--radius);margin:4px 0 12px;overflow:hidden;animation:si .18s ease;box-shadow:var(--shadow-active)}
+@keyframes si{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+.dhead{padding:1rem 1.25rem .875rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:12px}
+.dnum{font-size:30px;font-weight:700;color:var(--border-strong);line-height:1;flex-shrink:0;margin-top:2px}
+.dtitle{font-size:17px;font-weight:700;color:var(--text-primary);margin-bottom:3px}
+.dwhy{font-size:13px;color:var(--text-secondary);line-height:1.5}
+.prereqs{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.prereq{font-size:10px;padding:2px 8px;border-radius:999px;background:var(--accent-light);color:var(--accent);border:1px solid rgba(76,69,176,.2)}
+.tabs{display:flex;gap:2px;padding:10px 1.25rem 0;border-bottom:1px solid var(--border);background:var(--bg);overflow-x:auto}
+.tbtn{font-size:12px;font-weight:500;padding:6px 13px 8px;border:none;background:transparent;color:var(--text-tertiary);cursor:pointer;border-bottom:2px solid transparent;border-radius:var(--radius-sm) var(--radius-sm) 0 0;transition:color .15s,border-color .15s;position:relative;bottom:-1px;white-space:nowrap}
+.tbtn:hover{color:var(--text-secondary)}
+.tbtn.on{color:var(--accent);border-bottom-color:var(--accent);background:var(--surface)}
+.tbtn.yours.on{color:var(--yours);border-bottom-color:var(--yours)}
+.tbtn .tdot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--yours);margin-left:5px;vertical-align:middle}
+.panel{padding:1.25rem;display:none}
+.panel.on{display:block}
+.checklist{list-style:none}
+.checklist li{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;color:var(--text-secondary);line-height:1.5}
+.checklist li:last-child{border-bottom:none}
+.tlabel{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--text-tertiary);margin-bottom:8px}
+.tbox{background:#F4F4FB;border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius-sm);padding:14px 16px;font-family:var(--mono);font-size:12px;color:var(--text-primary);line-height:1.8;white-space:pre-wrap;word-break:break-word}
+.etable{width:100%;border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;border-collapse:collapse}
+.etable tr{border-bottom:1px solid var(--border)}
+.etable tr:last-child{border-bottom:none}
+.etable td{padding:10px 14px;vertical-align:top;font-size:13px;line-height:1.5}
+.etable td:first-child{font-weight:600;width:100px;color:var(--text-primary);background:var(--bg);border-right:1px solid var(--border);white-space:nowrap}
+.etable td:last-child{color:var(--text-secondary)}
+.etable tr:nth-child(even) td:last-child{background:#FAFAFE}
+.yours-hdr{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px;flex-wrap:wrap}
+.yours-label{font-size:13px;font-weight:600;color:var(--yours);margin-bottom:2px}
+.yours-hint{font-size:12px;color:var(--text-tertiary);line-height:1.5}
+.yours-btns{display:flex;gap:6px;flex-shrink:0;align-items:center}
+.abtn{font-size:11px;font-weight:500;padding:5px 10px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface);color:var(--text-secondary);cursor:pointer;transition:background .15s,border-color .15s;white-space:nowrap}
+.abtn:hover{background:var(--bg);border-color:var(--border-strong);color:var(--text-primary)}
+.abtn.pri{background:var(--yoursbg);color:var(--yours);border-color:var(--yoursbd)}
+.abtn.pri:hover{background:#d4eaf8}
+.yta{width:100%;min-height:260px;padding:14px 16px;font-family:var(--mono);font-size:12.5px;line-height:1.8;color:var(--text-primary);background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-sm);resize:vertical;transition:border-color .15s,box-shadow .15s;outline:none}
+.yta:focus{border-color:var(--yours);box-shadow:0 0 0 3px rgba(26,111,168,.1)}
+.yta::placeholder{color:var(--text-tertiary)}
+.sstatus{display:flex;align-items:center;gap:6px;margin-top:8px;font-size:11px;color:var(--text-tertiary);min-height:18px}
+.sstatus.saved{color:var(--p2)}
+.sstatus.copied{color:var(--yours)}
+.footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid var(--border);font-size:11px;color:var(--text-tertiary);text-align:center}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <h1>Founder's Playbook — 25 Startup Fundamentals</h1>
+  <p>Everything you need to build a startup, sorted by priority and prerequisites. Click any card to expand — use <strong>Your Version</strong> to write your own answers. Cards marked <span style="font-size:10px;font-weight:600;background:var(--newbg);color:var(--new);border:1px solid var(--newbd);padding:1px 5px;border-radius:3px">NEW</span> were added based on your specific needs.</p>
+  <div class="legend">
+    <span class="lp lp1"><span class="dot" style="background:#4C45B0"></span>Phase 1 · Foundation</span>
+    <span class="lp lp2"><span class="dot" style="background:#0F8F6A"></span>Phase 2 · Build</span>
+    <span class="lp lp3"><span class="dot" style="background:#C26A10"></span>Phase 3 · Launch</span>
+    <span class="lp lp4"><span class="dot" style="background:#C0414A"></span>Phase 4 · Grow</span>
+    <span class="lp lpnew"><span class="dot" style="background:#7C3AED"></span>New addition</span>
+  </div>
+  <div class="save-banner">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" stroke="#1A6FA8"/><path d="M3.5 6.2L5.2 7.9L8.5 4.5" stroke="#1A6FA8" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Your writing auto-saves in this browser and will be here next time you open this page.
+  </div>
+</div>
+<div id="app"></div>
+<div class="footer">Founder's Playbook · 25 fundamentals across 4 phases · Your Version tabs auto-save in this browser</div>
+<script>
+var PH=[
+  {id:1,label:"Phase 1 — Foundation",desc:"Before anything else",color:"#4C45B0",items:[0,1,2,3,4,5]},
+  {id:2,label:"Phase 2 — Build",desc:"Structure your startup",color:"#0F8F6A",items:[6,7,8,9,10,11,12,13,14]},
+  {id:3,label:"Phase 3 — Launch",desc:"Get to market",color:"#C26A10",items:[15,16,17,18,19]},
+  {id:4,label:"Phase 4 — Grow",desc:"Scale and fundraise",color:"#C0414A",items:[20,21,22,23,24]}
+];
+
+var IT=[
+/* 0 */ {num:"01",isNew:false,title:"Problem Statement",sub:"The single most important thing",
+  why:"Everything else is built on this. If the problem isn't real and urgent, nothing else matters.",
+  prereqs:[],
+  checklist:["Describe the problem in one sentence","Quantify the pain — cost, time, frequency","Identify who suffers from it most acutely","Validate it is not already solved well enough"],
+  template:"Problem: [Target user] struggle with [specific pain point] because [root cause].\n\nThis costs them [time/money/risk] and happens [frequency].\n\nToday they solve it by [current workaround], which is painful because [why it's inadequate].",
+  examples:[{b:"Airbnb",t:"Travelers pay too much for hotels, and homeowners have empty rooms going to waste."},{b:"Stripe",t:"Developers couldn't accept payments online without weeks of integration pain and banking bureaucracy."},{b:"Slack",t:"Teams were drowning in email threads and losing context across disconnected tools."},{b:"Uber",t:"Getting a taxi was unreliable, opaque, and often embarrassing — no ETA, cash only, no accountability."}]},
+
+/* 1 */ {num:"02",isNew:false,title:"Vision & Mission",sub:"Your north star",
+  why:"Vision attracts talent and investors. Mission aligns your team on a daily basis. Together they answer 'why does this company exist?'",
+  prereqs:["01 — Problem Statement"],
+  checklist:["Vision: the world you want to create — 10 to 20 year horizon","Mission: what you do every single day to get there","Make it ambitious but believable","Specific enough that it helps you say no to things"],
+  template:"Vision: A world where [big future state] — [emotional impact on people].\n\nMission: We [action verb] [what] for [who] so that [outcome].\n\nLitmus test: does a potential hire get excited reading this? Does it rule anything out?",
+  examples:[{b:"Tesla",t:"Vision: Accelerate the world's transition to sustainable energy. Mission: Design compelling electric vehicles and energy products."},{b:"Google",t:"Organize the world's information and make it universally accessible and useful."},{b:"LinkedIn",t:"Create economic opportunity for every member of the global workforce."},{b:"Spotify",t:"Unlock the potential of human creativity — giving a million artists the opportunity to live off their art and billions of fans the opportunity to enjoy it."}]},
+
+/* 2 */ {num:"03",isNew:true,title:"Why Now",sub:"Timing is the hidden variable of startup success",
+  why:"A great idea at the wrong time fails. The best founders articulate exactly why this year — not 3 years ago, not 3 years from now — is the right moment. Investors always ask this. Have a sharp answer.",
+  prereqs:["01 — Problem Statement","02 — Vision & Mission"],
+  checklist:["Identify the tech shift, cultural moment, or market gap that opened recently","Name the enabling condition that didn't exist 3 to 5 years ago","Explain why waiting another 2 years would mean missing the window","Connect your timing to a real shift in your target audience's behavior or needs"],
+  template:"Why [year] is the right time for [product]:\n\n1. Technology shift:\n   [What tech became available or affordable that enables this now?]\n   e.g. 'Mobile-first Gen Z grew up on social — they expect community to be digital-native.'\n\n2. Cultural moment:\n   [What behavior or attitude has recently shifted in your audience?]\n   e.g. 'Post-pandemic, fans lost their live community and never fully got it back online.'\n\n3. Market gap:\n   [What incumbent failed to adapt, or what new audience emerged?]\n   e.g. 'Reddit and Discord were built for 2010 internet culture. Gen Z fan identity is different.'\n\n4. Urgency — why not in 2 years:\n   [Why the window exists now and may close]\n   e.g. 'The creator economy is consolidating. Platforms that capture fan communities now will be impossible to displace later.'",
+  examples:[{b:"Airbnb",t:"Why 2008: The financial crisis made people desperate for extra income, and smartphones made real-time booking possible. Neither condition existed meaningfully in 2005."},{b:"Zoom",t:"Why 2013: WebRTC enabled browser video without plugins. Google killed Google Talk. Enterprises had no modern video option — yet remote work was quietly growing."},{b:"Figma",t:"Why 2016: Browser performance finally matched native apps. Design was the last creative discipline still chained to desktop software and file-sharing."},{b:"Fan platforms",t:"Why now: Post-COVID disconnection + creator economy maturity + Gen Z fandom as identity + Discord/Reddit failing emotional fan needs + no dominant player yet in structured fan community."}]},
+
+/* 3 */ {num:"04",isNew:true,title:"Core Values",sub:"How you operate and make decisions",
+  why:"Values are your filter for hiring, product decisions, and culture. Vague values ('integrity', 'innovation') are useless. Real values are specific enough to help you say no — to candidates, to features, to business deals.",
+  prereqs:["02 — Vision & Mission"],
+  checklist:["Write 4 to 6 values — more than 6 means none of them matter","Each value must describe a behavior, not a virtue","Test each: would a competitor claim the same one? If yes, it's too generic","Use as a hiring filter: would you reject a brilliant candidate who violates this?","Share them publicly — values only create accountability when they're visible"],
+  template:"Value 1: [Short memorable name]\nMeaning: [One sentence describing the behavior in action]\nWe do: [Specific example of this value at work]\nWe don't: [Specific behavior this value rules out]\n\nValue 2: [Short memorable name]\nMeaning: ...\n\nValue 3: ...\n\nDecision test: for every major decision, ask 'which of our values does this violate?'\nIf none — proceed. If one — discuss. If two — reconsider.",
+  examples:[{b:"Airbnb",t:"'Belong anywhere' — not just a tagline but a hiring filter. They rejected candidates who couldn't demonstrate genuine curiosity about strangers' lives."},{b:"Netflix",t:"'Freedom and responsibility' — an explicit rejection of corporate safety culture. People who need permission to act don't thrive there."},{b:"Patagonia",t:"'Cause no unnecessary harm' — specific enough to turn down profitable product lines, like avoiding synthetic fabrics until recycled versions existed."},{b:"Basecamp",t:"'Calm company' — explicitly rules out 80-hour weeks, FOMO culture, and VC growth pressure. A value that says no to entire business models."}]},
+
+/* 4 */ {num:"05",isNew:false,title:"Target Market & ICP",sub:"Who you serve — and who you serve first",
+  why:"Trying to sell to everyone means selling to no one. Narrow focus wins early. Your ICP is not your eventual market — it's the specific person who has the problem so badly they'll try anything.",
+  prereqs:["01 — Problem Statement"],
+  checklist:["TAM / SAM / SOM sizing — bottom-up, not top-down","Ideal Customer Profile: job, behaviors, daily frustrations, triggers","Early adopter persona — who has the problem so acutely they'll use an unpolished MVP?","Where they spend time online and offline — where you will find them"],
+  template:"TAM: Total market if everyone could use this — $[X]B\nSAM: Segment we can realistically reach — $[X]M\nSOM: What we can capture in 3 years — $[X]M\n\nIdeal Customer Profile (ICP):\n- Who: [age, identity, interest, context]\n- Daily pain: [what frustrates them right now]\n- Current workaround: [what they use today instead]\n- Trigger: [what event makes them go looking for something better]\n- Early adopter signal: [what makes them more likely to try something new]\n\nWhere to find them:\n- Online: [specific communities, platforms, hashtags]\n- Offline: [events, places, contexts]",
+  examples:[{b:"Notion",t:"Early ICP: individual developers and designers at tech startups who built their own productivity systems and were frustrated with Confluence."},{b:"Figma",t:"Early ICP: product designers at tech companies who hated emailing Sketch files and losing version history across teammates."},{b:"Canva",t:"ICP: non-designers at SMBs — marketers, social media managers — who needed to look professional without hiring a designer or agency."},{b:"HubSpot",t:"ICP: marketing managers at B2B SMBs ($1M–$10M revenue) who outgrew spreadsheets but couldn't afford Salesforce."}]},
+
+/* 5 */ {num:"06",isNew:false,title:"Value Proposition & Positioning",sub:"Why you — and how you fit in the world",
+  why:"Your value proposition is the clearest summary of what you do and for whom. Your positioning is how you sit in the competitive landscape. Both must be sharp enough to use in every piece of copy.",
+  prereqs:["01 — Problem Statement","05 — Target Market & ICP"],
+  checklist:["One sentence a 10-year-old can understand","Outcome-focused, not feature-focused","Different from competitors in a meaningful and durable way","Positioning statement — the classic 'for X who Y, we are Z' format","Test it: ask 5 strangers to repeat it back after hearing it once"],
+  template:"VALUE PROPOSITION:\nFor [target customer]\nwho [have this problem or want this outcome],\n[Product name] is a [category]\nthat [key benefit or what it does].\nUnlike [main alternative], we [key differentiator].\n\nPOSITIONING STATEMENT:\n'We are [category] for [audience] who want [outcome].'\n\nOne-liner (for social bio, business card, intro):\n'[Product] helps [audience] [achieve outcome] — [how].'\n\nWhat we are NOT:\n(Write 2-3 things you could be mistaken for but aren't — this prevents positioning drift)",
+  examples:[{b:"Dropbox",t:"'For anyone who works across devices, Dropbox keeps your files in sync everywhere — unlike emailing yourself files or losing USB drives.'"},{b:"Figma",t:"'Design is not just a designer's job.' Positioned as the collaborative design tool — not just a better Sketch, but a fundamentally different workflow."},{b:"Stripe",t:"'Payments infrastructure for the internet. A few lines of code and you're collecting money.' Positioned against complexity, not against competitors."},{b:"Notion",t:"Positioning: 'One workspace for everything — instead of juggling five different tools.' Anti-positioning: deliberately not a 'note-taking app' or a 'project manager'."}]},
+
+/* 6 */ {num:"07",isNew:false,title:"Business Model",sub:"How you make money — and what must be true",
+  why:"Your business model defines how you generate revenue and whether unit economics can ever be profitable. It also forces you to name your key assumptions — what must be true for any of this to work.",
+  prereqs:["05 — Target Market & ICP","06 — Value Proposition & Positioning"],
+  checklist:["Revenue model: subscription, marketplace, usage-based, ads, or hybrid","Pricing strategy and tiers — free vs paid structure","Unit economics: CAC versus LTV — target LTV:CAC of 3:1 or better","Key assumptions: what must be true for this business to work?","Break-even point and payback period"],
+  template:"Revenue model: [Freemium / Subscription / Marketplace / Transactional / Ad-supported]\n\nPricing:\n- Free tier: [what's included and why it's free]\n- [Plan] $[X]/mo: [what this unlocks]\n- [Plan] $[X]/mo: [what this unlocks]\n\nUnit economics:\n- CAC (cost to acquire 1 user/customer): $[X]\n- LTV (lifetime value): $[X]\n- LTV:CAC ratio target: 3:1 minimum\n- Payback period: [X months]\n\nKey assumptions (must be true for this to work):\n1. Users will [behavior] often enough to [metric]\n2. We can acquire users for less than $[X] via [channel]\n3. [X]% of free users convert to paid within [Y months]\n4. [Other critical assumption]",
+  examples:[{b:"Spotify",t:"Freemium: free ad-supported tier drives mass adoption → Premium at €11/mo. Key assumption: enough free users convert to sustain royalty costs."},{b:"Airbnb",t:"Two-sided marketplace: 3% host fee + 14% guest fee. No inventory. Key assumption: enough supply of hosts to meet demand in each city."},{b:"Figma",t:"Free for individuals → $12/editor/mo for teams. Key assumption: individual virality converts to team plans when projects need collaboration."},{b:"Fan platforms",t:"Key assumptions to test early: (1) fans will pay a premium for community access, (2) creators will invest time in your platform vs. Discord/Instagram, (3) content generation is sustainable without heavy moderation costs."}]},
+
+/* 7 */ {num:"08",isNew:false,title:"MVP",sub:"Smallest thing that proves your core bet",
+  why:"Prove your core hypothesis with the least effort. The MVP is not a small product — it's a specific test. Ship before you're ready, because 'ready' is often a form of fear.",
+  prereqs:["06 — Value Proposition & Positioning","07 — Business Model"],
+  checklist:["Define the one core hypothesis you are testing","Strip away everything that doesn't directly prove or disprove that hypothesis","Set a clear success metric before you build — not after","Get 5 to 10 real users to use it without you explaining it","Define the signal that would make you pivot"],
+  template:"Core hypothesis:\n[User type] will [behavior or pay] to solve [problem] if we give them [solution].\n\nMVP scope:\n✓ Must have (v1): [feature], [feature], [feature]\n✗ Cut for later: [feature], [feature], [feature], [feature]\n\nSuccess criteria (set before you build):\n[X] users do [Y action] within [Z days] without being prompted.\n\nPivot signal:\nIf [negative signal happens], we will reconsider [assumption].\n\nMVP format: [Landing page / Prototype / Manual service / Wizard of Oz / Demo video]",
+  examples:[{b:"Dropbox",t:"MVP was a 3-minute demo video — no product. 70k signups overnight proved demand before a single line of sync code was written."},{b:"Zappos",t:"MVP was a website with photos of shoes from local stores. Owner bought and shipped them himself to test if people would buy shoes online."},{b:"Airbnb",t:"MVP was a basic website and air mattresses in their own apartment during a sold-out conference. Proved willingness to pay and trust strangers."},{b:"Buffer",t:"MVP was a two-page site with a pricing table — no product. Signups proved demand. Only then did Leo build the actual scheduler."}]},
+
+/* 8 */ {num:"09",isNew:true,title:"Product — Features, Journey & UX",sub:"From feature list to emotional experience",
+  why:"An MVP tells you what to ship first. The product blueprint tells you what you're building toward and how it should feel. Without it, your roadmap becomes a wish list and your UX becomes an accident.",
+  prereqs:["08 — MVP","06 — Value Proposition & Positioning"],
+  checklist:["Core features list — ranked by user value, not difficulty to build","Cut list — features explicitly out of scope for v1 (write them down so you stop debating them)","Future features — v2+ roadmap so you're not tempted to build them now","User journey — map every stage from first discovery to loyal advocate","UX principles — 3 to 5 sentences describing how it should feel to use","Platform decision — mobile app, web, or both — and why","Tech approach — no-code MVP vs. custom build"],
+  template:"CORE FEATURES (v1 — must ship):\n1. [Feature] — value: [why users need this]\n2. [Feature] — value: [why users need this]\n3. [Feature] — value: [why users need this]\n\nCUT LIST (explicitly not v1):\n- [Feature] — revisit at [milestone]\n- [Feature] — revisit at [milestone]\n\nUSER JOURNEY:\nDiscover → [how they first hear about you]\nSign up → [first action, time to first value]\nAha moment → [the moment they truly 'get it']\nHabit → [the behavior that brings them back regularly]\nAdvocate → [what makes them tell others]\n\nUX PRINCIPLES:\n- It should feel [adj] because [reason]\n- It should feel [adj] because [reason]\n- It should never feel [adj] — we avoid this by [design decision]\n\nPLATFORM: [Mobile-first / Web-first / Both]\nReason: [where your target user actually spends their time]\n\nBUILD APPROACH: [No-code / Custom]\nTools / Stack: [list what you'll use]",
+  examples:[{b:"Instagram",t:"UX principle: 'Everything in 3 taps.' Mobile-first because photos are taken on phones. v1 features: upload, filter, follow, feed. Cut: DMs, Stories, Explore — all came later."},{b:"Duolingo",t:"Aha moment engineered at 'completion of first lesson.' Every onboarding decision was A/B tested to get users to that moment faster. The habit mechanic is the streak."},{b:"Superhuman",t:"UX principle: 'The fastest email experience ever made.' Every feature was tested against a speed benchmark. If it made email slower, it was cut — regardless of how useful it was."},{b:"Discord",t:"Platform: desktop-first for gamers. User journey: join server → pick roles (self-identity moment) → lurk → first message → mod. Permission layers were v1 because community health was core."}]},
+
+/* 9 */ {num:"10",isNew:false,title:"Brand Identity",sub:"Name, logo, voice, visual system, do's and don'ts",
+  why:"Trust and recognition. Great brands command premium pricing, attract better talent, and survive bad press. Brand identity is not decoration — it's how people decide whether to trust you.",
+  prereqs:["05 — Target Market & ICP","06 — Value Proposition & Positioning"],
+  checklist:["Company name — memorable, available domain and trademark","Logo and visual identity: colors, typography, image style","Brand voice and tone — 3 to 5 adjectives, with examples","Tagline or one-liner","Core origin story — why you built this and why it matters","Brand do's and don'ts — specific behaviors that protect the identity"],
+  template:"Name: [Company name]\nDomain: [name.com — check availability now]\nTagline: [Verb] [outcome] for [audience]\n\nBrand personality (human traits):\n[adj], [adj], [adj] — like a person, not a company\n\nBrand voice:\nWe are: [direct / warm / playful / honest]\nWe are not: [corporate / jargon-heavy / ironic / cold]\nIn one sentence we sound like: [description]\n\nVisual identity:\n- Primary color: [hex] — evokes [feeling]\n- Secondary color: [hex] — used for [purpose]\n- Typography: [font family] — feels [adj]\n- Image style: [real people / abstract / illustrated / documentary]\n\nBrand do's:\n✓ [Specific thing we always do]\n✓ [Specific thing we always do]\n\nBrand don'ts:\n✗ [Specific thing we never do or say]\n✗ [Specific thing we never do or say]\n\nOrigin story (2–3 sentences):\n[Founder] noticed [problem] and couldn't believe nobody had solved it. So they built [solution] because [deeper reason].",
+  examples:[{b:"Apple",t:"Voice: simple, confident, human. Brand don't: never lead with specs — lead with what it lets you do. 'Think Different' was a values statement, not a product claim."},{b:"Mailchimp",t:"Brand personality: quirky best friend, not software company. Voice: warm and funny with a straight face. Don't: never use jargon or sound corporate, even in error messages."},{b:"Patagonia",t:"Brand do: take a public stance on environmental issues, even if it costs sales. Brand don't: never make a product claim you can't back up with materials transparency."},{b:"Stripe",t:"Visual identity: clean white space, precise typography, deep purple as the only color accent. Image style: real developer setups, not stock photos of people shaking hands in offices."}]},
+
+/* 10 */ {num:"11",isNew:true,title:"Competitor Analysis",sub:"Know the landscape before you enter it",
+  why:"Every investor will ask 'what about X?' You need a sharper answer than 'we're better.' A real competitor analysis reveals your white space — the specific unoccupied gap that none of them fill.",
+  prereqs:["05 — Target Market & ICP","06 — Value Proposition & Positioning"],
+  checklist:["List 3 to 5 direct competitors — same problem, same audience","List 3 to 5 indirect alternatives — different solution to the same underlying need","For each: what do they do well? What do they do poorly? Who are their real users?","Find the white space: what does nobody do well?","Identify your competitive moat: what makes you hard to copy?"],
+  template:"DIRECT COMPETITORS:\n1. [Company] — solves [X] for [who], strong at [Y], weak at [Z]\n2. [Company] — solves [X] for [who], strong at [Y], weak at [Z]\n3. [Company] — solves [X] for [who], strong at [Y], weak at [Z]\n\nINDIRECT ALTERNATIVES (what people use today instead):\n1. [Behavior or tool] — e.g. 'fans use WhatsApp groups'\n2. [Behavior or tool] — e.g. 'fans post on Reddit r/[fandom]'\n\nWHITE SPACE:\n'All of them do [X] well, but none of them [what you uniquely do].'\n\nCOMPETITIVE MOAT (what makes you hard to copy):\n- Network effect: [how the platform gets more valuable as it grows]\n- Switching cost: [why leaving would be painful]\n- Unique data: [what you accumulate that they can't replicate]\n- Community: [the identity layer that locks in loyalty]\n\nPOSITIONING MAP (describe 2 axes that matter in your space):\nAxis 1: [e.g. casual ←→ deep community]\nAxis 2: [e.g. creator-centric ←→ fan-centric]\nWhere we sit: [describe your position]\nWhere nobody sits: [that's your opening]",
+  examples:[{b:"Figma vs field",t:"Figma's white space: Sketch was powerful but Mac-only and file-based. InVision was prototyping-only. No tool was real-time collaborative in the browser. That gap was the entire product."},{b:"Notion vs field",t:"White space: Confluence was enterprise/corporate and ugly. Evernote was personal but chaotic. No tool was a flexible, beautiful workspace for small creative teams. Notion occupied that gap."},{b:"Fan platforms",t:"Reddit: generic, anonymous, not fan-first. Discord: chat-heavy, poor content discovery. Fandom: wiki-only, outdated UX. TikTok: algorithm-driven, no community memory or depth. Map these gaps — that's your positioning."},{b:"Framework",t:"Plot competitors on 2 meaningful axes. Your position should be visibly unoccupied. If it's not, your differentiation isn't real yet — go back to your value proposition."}]},
+
+/* 11 */ {num:"12",isNew:true,title:"Content & Social Media",sub:"Your voice before the product launches",
+  why:"For a B2C startup — especially a community platform — your social media presence is your product sample. Before anyone tries your product, they judge whether to trust you based on how you show up online.",
+  prereqs:["10 — Brand Identity","05 — Target Market & ICP"],
+  checklist:["Pick 1 to 2 platforms to start — where your audience actually lives, not where you're comfortable","Define 3 to 4 content pillars — consistent themes you rotate between","Set a posting cadence you can genuinely sustain for 6 months","Plan your launch content — the first 30 days of posts, written in advance","Define your engagement approach — how you respond, how fast, what tone","Seed pre-launch content to build an audience before the product is ready"],
+  template:"PRIMARY PLATFORM: [Platform — why this one specifically]\nSECONDARY PLATFORM: [Platform — why this one]\n\nCONTENT PILLARS (rotate through these):\n1. [Theme — e.g. 'fan stories'] — example post: [describe]\n2. [Theme — e.g. 'behind the build'] — example post: [describe]\n3. [Theme — e.g. 'community moments'] — example post: [describe]\n4. [Theme — e.g. 'founder POV'] — example post: [describe]\n\nPOSTING CADENCE: [X] times/week on [platform]\n\nENGAGEMENT RULES:\n- Reply to every comment within [X] hours\n- We always sound: [tone — e.g. warm, real, fan-first]\n- We never: [behavior to avoid — e.g. sound corporate, ignore DMs]\n\n30-DAY LAUNCH PLAN:\nWeek 1: [Theme — e.g. 'why we're building this, our story']\nWeek 2: [Theme — e.g. 'fan stories and memories we're collecting']\nWeek 3: [Theme — e.g. 'behind the product, sneak peeks']\nWeek 4: [Waitlist CTA + launch content + community announcement]",
+  examples:[{b:"Glossier",t:"Content pillar: real people, real skin. Never used professional models for the first 2 years. UGC-first strategy made followers feel the brand was theirs — not the company's."},{b:"Duolingo TikTok",t:"Picked TikTok because Gen Z lived there. Built a deliberately unhinged mascot persona. 7M followers by leaning into meme culture instead of product marketing."},{b:"Superhuman",t:"No social presence pre-launch. Built intrigue purely through exclusivity and word-of-mouth. Counter-example: silence can be a content strategy when your product is the promise."},{b:"Fan platforms",t:"Your content should mirror your product: share fan stories, celebrate fan moments, ask fans to share their memories. The content strategy is a preview of the community experience itself."}]},
+
+/* 12 */ {num:"13",isNew:false,title:"Legal Structure",sub:"Entity, IP, agreements — do this early",
+  why:"Wrong structure early creates massive cleanup costs later — especially with investors. Legal work done at founding costs $2k. Legal work done to fix a mess costs $50k and months of delay.",
+  prereqs:[],
+  checklist:["Incorporate as a C-Corp (preferred by VCs) or LLC","Assign all IP to the company — not to founders personally","Co-founder agreement including vesting schedule: 4 years, 1 year cliff","SAFE notes or cap table setup for first checks","Basic terms of service and privacy policy before any user data is collected"],
+  template:"Entity type: [C-Corp in Delaware] — recommended for VC-backed startups\n\nEquity split:\n- [Founder 1] — CEO: [X]%, 4yr vest, 1yr cliff\n- [Founder 2] — CTO: [X]%, 4yr vest, 1yr cliff\n- Option pool: 10–15% reserved for employees\n\nIP assignment: all founders sign IP assignment agreement on day 1.\n\nFirst investment instrument:\nSAFE note: $[cap] post-money valuation cap, [X]% discount\n\nLegal checklist:\n□ Certificate of incorporation filed\n□ IP assignment signed by all founders\n□ Co-founder vesting agreement signed\n□ Terms of service and privacy policy live before first user\n□ Cap table set up in [Carta / spreadsheet]",
+  examples:[{b:"YC standard",t:"YC recommends: Delaware C-Corp, SAFE notes (not convertible notes), 4yr vesting with 1yr cliff, 10% option pool minimum before any investor."},{b:"Stripe",t:"Patrick & John Collison started with a standard Delaware C-Corp. A clean cap table from day 1 enabled rapid institutional investment without legal complications."},{b:"Airbnb",t:"Started as LLC, then converted to C-Corp before YC — a painful and expensive process they warn every founder to skip by starting as a C-Corp."},{b:"Best practice",t:"Use Stripe Atlas or Clerky for fast, standardized incorporation. Get IP assignment and founder vesting signed before any investor meeting. These are table stakes."}]},
+
+/* 13 */ {num:"14",isNew:false,title:"Financial Plan",sub:"Runway, burn rate, unit economics",
+  why:"Runway is oxygen. Every single decision you make depends on knowing how long you have. Founders who don't know their burn rate make bad decisions at speed.",
+  prereqs:["07 — Business Model"],
+  checklist:["12 to 18 month cash flow forecast","Monthly burn rate — salaries, infrastructure, tools, marketing","Revenue projections built bottom-up, not top-down","Fundraising timeline and how much you need to raise","Break-even scenario — what does ramen profitability look like?"],
+  template:"Monthly burn: $[X]k\n  Breakdown: salaries $[X]k + infra $[X]k + tools $[X]k + other $[X]k\n\nCurrent runway: [X] months (at current burn)\n\nRevenue forecast (bottom-up):\n  Month 1:  [X] users × $[X] ARPU = $[X]k MRR\n  Month 6:  [X] users × $[X] ARPU = $[X]k MRR\n  Month 12: [X] users × $[X] ARPU = $[X]k MRR\n\nDefault alive check:\n  Do we reach profitability before running out of cash — yes / no?\n  If no: we need to raise $[X]M by [date] to reach [milestone].\n\nUse of funds:\n  [X]% engineering / product\n  [X]% marketing and growth\n  [X]% operations",
+  examples:[{b:"Default alive",t:"Paul Graham: 'Are you default alive (reach profitability on current cash) or default dead?' Every founder should know which one they are, at all times."},{b:"Buffer",t:"Buffer shared full financials publicly — revenue, salaries, equity. Radical transparency became a brand differentiator, a talent magnet, and a PR story."},{b:"Rule of thumb",t:"Seed stage: 18 months runway minimum. Series A: show 3× revenue growth year over year. Burn multiple (net burn / net ARR added) below 1.5 is healthy."},{b:"YC advice",t:"Your most important metric at any given moment: months until zero. Optimize for growth, but always know your number."}]},
+
+/* 14 */ {num:"15",isNew:true,title:"Operations & Execution",sub:"How you run the company day-to-day",
+  why:"Great ideas die from operational chaos. As a two-person founding team, clarity on who owns what, which tools you use, and how decisions get made is the difference between momentum and stagnation.",
+  prereqs:["13 — Legal Structure"],
+  checklist:["Define each founder's primary domain — who leads product, who leads tech, who leads go-to-market","List skill gaps honestly — what do you not have that you'll need to hire or outsource?","Choose a minimal tool stack — don't over-tool before you have users","Establish a weekly rhythm — what rituals keep you aligned?","Define your decision-making framework — who has final say on what?","Set a 'definition of done' so nothing lives in limbo"],
+  template:"FOUNDER ROLES:\n- [Name] — leads: [product / design / community / marketing]\n- [Name] — leads: [engineering / infrastructure / data]\n- Shared decisions: [fundraising, hiring, pivots, major partnerships]\n\nSKILL GAPS (what we need but don't have):\n1. [Gap] — plan: [hire full-time / freelance / no-code tool by X date]\n2. [Gap] — plan: [hire full-time / freelance / no-code tool by X date]\n\nTOOL STACK (keep it small):\n- Project management: [Linear / Notion / Trello]\n- Communication: [Slack / Discord]\n- Design: [Figma]\n- Docs and wiki: [Notion / Confluence]\n- Analytics: [Mixpanel / PostHog]\n- Customer support: [Intercom / email]\n\nWEEKLY RHYTHM:\n- Monday: [planning ritual — write weekly goals, set priorities]\n- Friday: [review ritual — what shipped, what's blocked, what we learned]\n- Daily async: [how you communicate between rituals — shared doc, Slack update]\n\nDECISION RULE:\n- Day-to-day: each founder decides in their domain without asking\n- Big decisions (pivots, hires, fundraise): both founders must agree",
+  examples:[{b:"Basecamp",t:"'Shape Up' method: 6-week cycles, no sprints, no standups. Each person owns their scope. Async-first — written communication over meetings."},{b:"Early Stripe",t:"Patrick (strategy/product) + John (engineering). Clear domain split. Internal memos instead of meetings. 'Write things down' was an operating principle from day one."},{b:"37signals",t:"Remote-first from day 1. Three tools: email, Basecamp, GitHub. 'No bullshit meetings' rule. One written goal per person per week, every Monday."},{b:"Two-person rule",t:"Most successful 2-person founding teams maintain a shared 'not-doing list' that is as important as the to-do list. Write down what you've explicitly decided not to build or do yet."}]},
+
+/* 15 */ {num:"16",isNew:false,title:"Customer Discovery",sub:"Talk to users before — and while — you build",
+  why:"Most startups fail by building something nobody wants. Interviews fix this. The goal is not to validate your idea — it's to learn what you don't know. Bad questions ('would you use this?') give useless answers.",
+  prereqs:["01 — Problem Statement","05 — Target Market & ICP"],
+  checklist:["Run 20 to 50 discovery interviews before and during building","Use The Mom Test: ask about past behavior, not future intentions or opinions","Find your early adopters — who has the problem so acutely they'll use an unpolished product?","Document patterns systematically — what repeats across interviews is signal","Book 5 interviews this week — no product needed"],
+  template:"THE MOM TEST interview script:\n\n1. 'Tell me about how you currently handle [problem area].'\n2. 'Walk me through the last time that happened.'\n3. 'What was the hardest part of that experience?'\n4. 'How much is this costing you — in time or money?'\n5. 'What have you already tried to solve it?'\n6. 'Who else is involved when this happens?'\n7. 'Would you share this with 3 fan friends?' (tests referral intent)\n\nAVOID asking:\n✗ 'Would you use this?' (hypothetical = meaningless)\n✗ 'Do you like this idea?' (they'll be polite)\n✗ 'How much would you pay?' (hypothetical pricing is unreliable)\n\nSEEK:\n✓ Specific past stories\n✓ Existing workarounds (these reveal true pain)\n✓ Emotion — frustration, embarrassment, resignation",
+  examples:[{b:"Airbnb",t:"Brian Chesky personally stayed with early hosts. He did all of Airbnb's customer support himself for months to understand user pain at the closest possible level."},{b:"Intercom",t:"Des Traynor spent weeks in sales calls and support tickets before writing a single line of code. Built the product using the exact words customers used to describe their pain."},{b:"Superhuman",t:"Rahul Vohra ran 1-on-1 onboarding sessions with the first 1,000 users personally. Used NPS responses to define the ICP before scaling any acquisition."},{b:"Figma",t:"Dylan Field embedded himself in design teams during grad school. Watched real designers work before anyone asked him to build a browser-based design tool."}]},
+
+/* 16 */ {num:"17",isNew:false,title:"Go-to-Market Strategy",sub:"Channels, growth loops, PR — how you spread",
+  why:"A great product with no distribution strategy stays a hobby. Your first GTM question is not 'how do we grow?' — it's 'how do we get our first 100 users?' Everything after that comes from learning from those 100.",
+  prereqs:["05 — Target Market & ICP","06 — Value Proposition & Positioning","08 — MVP"],
+  checklist:["Primary acquisition channel — 1 to 2 channels, not 10","Define your growth loop — how does each user bring the next user?","Pricing and packaging at launch","Sales motion: product-led, community-led, or direct outreach","PR and earned media: where would journalists write about you?","Launch sequence: waitlist → beta → public launch"],
+  template:"GTM MOTION: [Product-led / Community-led / Sales-led]\n\nPRIMARY CHANNEL: [where you'll get users]\nSECONDARY CHANNEL: [backup or amplifier]\n\nGROWTH LOOP:\nStep 1: User does [action]\nStep 2: That action exposes [other user] to the product\nStep 3: [Other user] signs up because [motivation]\nLoop coefficient target: > 0.5 (every 2 users bring 1 more)\n\nPR ANGLE:\nWhy would a journalist write about us? [specific hook]\nTarget publications: [list 3–5 relevant outlets]\nFounder story angle: [what's compelling about why you built this]\n\nLAUNCH SEQUENCE:\nPhase 1: Waitlist page live → target [X] signups\nPhase 2: Closed beta → [X] hand-picked early users\nPhase 3: Public launch → [ProductHunt / press / community post]\n\nLAUNCH PRICING:\n- [Tier 1]: $[X]/mo — [what it includes]\n- [Tier 2]: $[X]/mo — [what it includes]",
+  examples:[{b:"Notion",t:"Community-led: templates shared on Reddit → viral sharing loop. No paid acquisition for years. Growth loop: every template shared was a product demo. Users became evangelists."},{b:"Superhuman",t:"Invite-only referral chain. Growth loop: every user could invite 3 people. Created scarcity + social proof simultaneously. Journalists wrote about it because of the waitlist exclusivity."},{b:"HubSpot",t:"PR angle: 'inbound marketing' — they invented the term, wrote the book, gave away tools free. Journalists covered the category, which HubSpot owned. GTM was the industry narrative itself."},{b:"Fan platforms",t:"Growth loop to design: fan invites other fan → both get access to an exclusive community space → each new fan makes the community more valuable. Design the loop before you launch."}]},
+
+/* 17 */ {num:"18",isNew:true,title:"Community & Experience Design",sub:"The emotional layer — critical for fan platforms",
+  why:"For a community-driven product, this IS the product. How users feel when they're in your space — safe, seen, excited, proud — determines whether they stay, contribute, and bring friends. Technical features without emotional design are just empty rooms.",
+  prereqs:["05 — Target Market & ICP","10 — Brand Identity","12 — Content & Social Media"],
+  checklist:["Define the emotional outcome: what should a user feel after 10 minutes on your platform?","Design the safety layer: what makes people feel safe enough to share personal memories?","Design the belonging moment: when does a new user first feel 'this is for me'?","Write community guidelines that reflect your values — human and specific, not legal boilerplate","Define your moderation approach — who does it, how fast, what is the escalation path?","Map the emotional journey from lurker to superfan to community leader","Design how fans interact with each other and with creators"],
+  template:"EMOTIONAL DESIGN PRINCIPLES:\nAfter using our platform, fans should feel:\n  [Emotion 1 — e.g. seen], [Emotion 2 — e.g. connected], [Emotion 3 — e.g. proud]\nThey should never feel:\n  [Emotion — e.g. judged, invisible, overwhelmed, like a number]\n\nSAFETY DESIGN:\n- We protect users by: [specific mechanism — e.g. private by default, no real names required]\n- How we handle harassment: [report flow + response time target]\n- Tone of our safety communication: [human / direct / not legal-speak]\n\nBELONGING MOMENTS (deliberately design these):\n- First visit: [what says 'you're in the right place']\n- First post: [what happens when someone shares for the first time — celebration?]\n- First connection: [when they find another fan who gets it]\n- Milestone: [what happens at 10 posts, 1 month, 1 year]\n\nCOMMUNITY GUIDELINES (values-based, not rule-based):\n1. [e.g. 'Celebrate each other's fandom — even if it's not yours']\n2. [e.g. 'Share memories generously. This is a space for stories, not takes.']\n3. [e.g. 'Protect the space. Report what breaks the trust, quietly.']\n\nMODERATION:\n- Who moderates: [founding team / community mods / AI-assisted triage]\n- Response time: [target X hours]\n- Escalation path: report → review → action → appeal → transparency\n\nCREATOR-FAN DYNAMIC:\n- Fans can interact with creators via: [comments / direct messages / community posts]\n- Creators can: [reply / acknowledge / co-create with fans]\n- What stays private vs. public: [define the boundary]",
+  examples:[{b:"Swifties",t:"Taylor Swift built Easter eggs into her content — deliberate details for superfans to discover together. Made fans feel seen and smart. The community formed around collective decoding."},{b:"Peloton",t:"Emotional design: every class ends with a personal instructor message. High-five feature (other riders see your workout). Leaderboard for competition, community tab for belonging — both needs served."},{b:"Discord",t:"Safety layer: granular channel permissions, server roles, verified servers. Belonging moment: choosing your own roles when joining a server. Self-selection creates immediate identity."},{b:"Best fan communities",t:"The best fan subreddits and Discord servers are moderated by superfans — people who know the lore, set the tone, and protect the culture. The mod is the community's emotional memory."}]},
+
+/* 18 */ {num:"19",isNew:false,title:"Metrics & KPIs",sub:"The numbers that tell you the truth",
+  why:"You can't improve what you don't measure. The right metrics keep you honest. The wrong metrics make you feel good while the business quietly dies. Set them before launch, not after.",
+  prereqs:["07 — Business Model","08 — MVP"],
+  checklist:["North star metric: the one number that captures your core value being delivered","Acquisition metrics: CAC, conversion rate, channel mix","Retention metrics: D1 / D7 / D30 retention, churn, NPS — retention is the single most important signal for social products","Revenue metrics: MRR, ARR, LTV, payback period","Set up analytics before you get your first user"],
+  template:"NORTH STAR METRIC:\n'[X] users who do [Y] within [Z days] of joining.'\n(This is the leading indicator of long-term retention.)\n\nACQUISITION:\n- Visitors → signups: [X]%\n- Signups → activated: [X]%  (activated = completed core action)\n- CAC by channel: [channel 1] = $[X] / [channel 2] = $[X]\n\nRETENTION (most important for social/community):\n- D1 retention: [X]% (benchmark: > 40% is excellent)\n- D7 retention: [X]% (benchmark: > 20% is excellent)\n- D30 retention: [X]% (benchmark: > 10% is excellent)\n- Monthly churn: [X]% (target < 5% for consumer social)\n- NPS: [X] (target > 40)\n\nCOMMUNITY HEALTH:\n- Posts per active user per week: [X]\n- Reply rate on posts: [X]%\n- Invite rate: [X]% of users invite someone\n\nREVENUE:\n- MRR: $[X] | MoM growth: [X]%\n- LTV:CAC: [X]:1 (target > 3:1)",
+  examples:[{b:"Airbnb",t:"North star: nights booked. Led to a metric tree: search → listing views → host contact → booking. Every team measured their contribution to that chain."},{b:"Slack",t:"North star: messages sent per org. Discovered teams sending 2,000+ messages were nearly never churned. Everything in onboarding was optimized to reach that threshold."},{b:"Facebook",t:"'7 friends in 10 days' — discovered via cohort analysis. The retention magic number that drove all new-user onboarding design for years."},{b:"Community metrics",t:"For fan platforms specifically: track 'content velocity' (posts per active user per week) and 'reply depth' (how many replies per post). These predict whether your community is alive or zombie."}]},
+
+/* 19 */ {num:"20",isNew:true,title:"Roadmap & Milestones",sub:"What you're building — and by when",
+  why:"A roadmap turns vision into a sequence of achievable bets. Each phase has one clear goal and a gate that must be passed before moving on. Without milestones, every week feels like starting over.",
+  prereqs:["08 — MVP","07 — Business Model","14 — Financial Plan"],
+  checklist:["Break the next 12 to 18 months into 3 to 4 phases","Each phase has one primary goal — not a list of features","Each phase has a clear gate: what must be true before you move on?","Attach rough timelines — even wrong timelines create accountability","Separate product milestones from business milestones"],
+  template:"PHASE 1 — Validation ([Month 1–3])\nGoal: Prove the problem is real and your solution is wanted\nGate: [X] people say 'I would pay for this' or [X] sign up for waitlist\nKey deliverables:\n  □ [X] customer discovery interviews completed\n  □ Waitlist page live with [X] signups\n  □ Problem and solution defined and validated\n\nPHASE 2 — MVP Build ([Month 3–6])\nGoal: Ship the smallest version that proves your core value\nGate: [X] users complete [core action] within [Z days] of signing up\nKey deliverables:\n  □ Core product live and tested with [X] beta users\n  □ Analytics tracking D1 / D7 / D30 retention\n  □ First [X] users giving qualitative feedback\n\nPHASE 3 — Launch ([Month 6–9])\nGoal: Get to [X] active users / $[X] MRR\nGate: D30 retention above [X]%, growing organically\nKey deliverables:\n  □ Public launch executed\n  □ GTM channel working and measurable\n  □ First revenue collected\n\nPHASE 4 — Growth ([Month 9–18])\nGoal: Prove the growth loop and prepare for fundraising\nGate: 3× growth in [X months], LTV:CAC > 3:1\nKey deliverables:\n  □ Seed round closed or in process\n  □ First non-founder hire made\n  □ Growth loop validated and documented",
+  examples:[{b:"Airbnb phases",t:"Phase 1: 3 paying guests in their own apartment (proof of willingness to pay and trust). Phase 2: 20 hosts in San Francisco. Phase 3: spread to NYC. Each phase had a city/count gate."},{b:"Superhuman",t:"Phase 1: personal outreach to 100 email power users. Phase 2: invite-only referral until NPS > 50. Only then: scale. They never moved phases without hitting the gate first."},{b:"Notion",t:"After failing v1, they rebuilt. Phase 1 goal: 1,000 daily active creators. They ran zero ads until D30 retention was above 30%. Metrics gated the roadmap, not calendar dates."},{b:"Rule of thumb",t:"Pre-seed: validation phase. Seed: product-market fit phase. Series A: scale phase. Don't fundraise for the next phase until you've demonstrably completed the current one."}]},
+
+/* 20 */ {num:"21",isNew:false,title:"Pitch & Communication",sub:"Every format — from 10 seconds to 30 slides",
+  why:"You'll pitch in elevators, at dinner parties, in Zoom calls, and on stage. Each context needs a different format. Writing all of them sharpens your thinking — the elevator pitch reveals whether you truly understand your own business.",
+  prereqs:["01 — Problem Statement","06 — Value Proposition & Positioning","08 — MVP"],
+  checklist:["Elevator pitch: 1 to 2 sentences you can say without thinking","30-second pitch: problem + solution + why you","2-minute pitch: full story with market and traction","Full pitch deck: 11 slides for investor meetings","Test each format with someone who knows nothing about your idea"],
+  template:"ELEVATOR PITCH (10–15 seconds):\n'We're building [product] that helps [audience] [achieve outcome] — unlike [what exists today].'\n\n30-SECOND PITCH:\n'[Audience] struggle with [problem]. Existing options [why they fail].\nWe built [product] — [what it does in one sentence].\nWe're [current stage] and looking for [what you need].'\n\n2-MINUTE PITCH (spoken):\n1. Open with the pain: [vivid real-world example of the problem]\n2. The solution: [mechanism, simply explained]\n3. The market: [TAM in one sentence — make it feel big but believable]\n4. Why us: [unfair advantage — why this team?]\n5. Proof: [traction — users, revenue, retention, partnerships]\n6. The ask: 'We're raising $[X] to [specific milestone] by [date].'\n\nPITCH DECK (11 slides):\n01. Title — name, tagline, contact\n02. Problem — the painful truth, made visceral\n03. Solution — your product, simply explained\n04. Why now — timing, trends, market shifts\n05. Market — TAM / SAM / SOM bottom-up\n06. Product — screenshots, demo, or video\n07. Traction — users, revenue, growth, retention\n08. Business model — revenue, pricing, unit economics\n09. Go-to-market — how you'll grow\n10. Team — why you are the right people, right now\n11. The ask — amount, milestone, use of funds",
+  examples:[{b:"Airbnb elevator",t:"'We're the eBay for space — turning underused rooms into income for hosts and unique, affordable stays for travelers.' Explains a two-sided marketplace in 15 words."},{b:"Stripe elevator",t:"'Seven lines of code and you're accepting payments online.' No market size, no jargon — just the product promise as simply as possible."},{b:"Sequoia deck",t:"The canonical VC format: company purpose (not a tagline) → problem → solution → why now → market → competition → product → business model → team → financials → ask."},{b:"YC advice",t:"Paul Graham: 'If you can't explain your startup in one clear sentence, you don't understand it yet.' Write the elevator pitch first — it reveals gaps that 30 slides can hide."}]},
+
+/* 21 */ {num:"22",isNew:false,title:"Team & Advisors",sub:"Who is around the table — and why it matters",
+  why:"Investors bet on people first, idea second. The right team is the unfair advantage. Advisors open specific doors. Both require formal structure or they become informal disappointments.",
+  prereqs:["10 — Brand Identity","13 — Legal Structure"],
+  checklist:["Founding team covers: product, technology, and go-to-market — ideally 2 of the 3 between 2 founders","Identify your skill gaps and have a plan for each","3 to 5 advisors with specific leverage: domain expertise, network, or credibility signal","Formalize advisor equity: 0.1 to 0.5% over 2 years with a 6-month cliff","Know your 'unfair advantage' — the thing about this team that nobody else has"],
+  template:"FOUNDING TEAM:\n- [Name] — [role]: [background, domain expertise, why them for this]\n- [Name] — [role]: [background, domain expertise, why them for this]\n\nUNFAIR ADVANTAGE:\n[The specific insight, experience, or access that makes this team the right team for this idea.]\n\nSKILL GAPS:\n1. [Gap] — plan: [hire / advisor / tool by X milestone]\n2. [Gap] — plan: [hire / advisor / tool by X milestone]\n\nADVISORS (be specific — generic advisors are useless):\n1. [Name] — [company/background]\n   Specific value: [opens intro to X / domain expertise in Y / credibility signal for Z]\n   Equity: 0.25%, 2yr vest, 6mo cliff\n\nNEXT HIRES (post-raise, in priority order):\n1. [Role] — because [specific gap this fills]\n2. [Role] — because [specific gap this fills]",
+  examples:[{b:"Apple",t:"Jobs (vision and GTM) + Wozniak (engineering). Classic product + tech founding pair. Complementary obsessions. Each would have failed without the other."},{b:"Stripe",t:"Patrick (CEO/strategy) + John (CTO/engineering) Collison. Both had built and sold companies before. Payments domain depth + developer credibility = investor trust from day one."},{b:"Airbnb",t:"Brian Chesky (design/product), Joe Gebbia (design/product), Nathan Blecharczyk (engineering). A visual-first community product built by people who thought in design. Not an accident."},{b:"Advisors",t:"The best advisors open specific doors — not give generic advice. An advisor who can intro you to your top 10 target enterprise clients is worth 0.5% on a 2yr vest. A famous name on your deck is not."}]},
+
+/* 22 */ {num:"23",isNew:false,title:"Fundraising Strategy",sub:"Pre-seed through Series A — run a process",
+  why:"Fundraising is a full-time job for 6 to 8 weeks. Going in without a strategy means leaving money on the table and losing months. The best fundraises are manufactured — not lucky.",
+  prereqs:["21 — Pitch & Communication","14 — Financial Plan"],
+  checklist:["Know your stage: pre-seed, seed, or Series A","Target investors whose check size, thesis, and portfolio fit yours — research every name","Build a list of 50 to 100 investors and prioritize warm introductions","Create FOMO by running a process: set a soft close date and stick to it","Know your terms: valuation cap, dilution, pro-rata rights, information rights"],
+  template:"RAISE TARGET: $[X]M [pre-seed / seed]\nINSTRUMENT: [SAFE / Priced round]\nVALUATION CAP: $[X]M post-money\nUSE OF FUNDS: Reach [milestone] by [date]\n\nINVESTOR PIPELINE:\nTier 1 — Dream list: [Fund A], [Fund B]\n  → Need warm intro from: [person]\nTier 2 — Strong fit: [Fund C], [Fund D]\n  → Can cold outreach\nTier 3 — Angels and backup: [Name A], [Name B]\n\nPROCESS TIMELINE:\nWeek 1–2: Warm intros go out simultaneously\nWeek 3–4: First meetings (no commitment talk yet)\nWeek 5–6: Partner meetings + pitch refinement\nWeek 7: Soft close deadline communicated\nWeek 8: Term sheets + due diligence\nWeek 10: Close\n\nFOMO MECHANICS:\n- Mention other meetings (without lying)\n- Set a close date and hold it\n- Lead with traction, not ask",
+  examples:[{b:"YC model",t:"YC Demo Day is engineered FOMO: 100+ investors, 2 weeks, companies with momentum close rounds because everyone fears missing out. Design your own version of this dynamic."},{b:"Notion",t:"Bootstrapped to $1M ARR before raising. Negotiated from strength — turned down multiple term sheets. Raised Series A at $2B cap in 2019 from a position of zero urgency."},{b:"Figma",t:"Raised $3.8M seed after 3 years of building. Used traction (early design community adoption) to negotiate valuation, not just deck slides. Patience created leverage."},{b:"Dalton Caldwell",t:"YC partner advice: 'Don't fundraise until your metrics make investors feel FOMO. The best time to raise is when you genuinely don't need to.' Build to that point first."}]},
+
+/* 23 */ {num:"24",isNew:true,title:"Risks & Unknowns",sub:"What could go wrong — and what you'll test first",
+  why:"Most startups don't die from bad luck. They die from avoidable risks they never named. Writing risks down is the first step to mitigating them. Investors respect founders who know their risks; they distrust founders who claim there are none.",
+  prereqs:["08 — MVP","07 — Business Model","11 — Competitor Analysis"],
+  checklist:["List your top 5 to 8 risks across product, market, team, and external dimensions","Score each: probability (H/M/L) × impact (H/M/L)","Identify your top 3 'killer risks' — risks that, if they materialize, the company is in serious trouble","For each killer risk: design a cheap, fast test that proves or disproves it","List your known unknowns — things you haven't figured out yet"],
+  template:"RISK REGISTER:\n1. [Risk description]\n   Category: [Product / Market / Team / External / Legal]\n   Probability: [H / M / L]   Impact: [H / M / L]\n   Mitigation: [what you'll do about it]\n\n2. [Risk description] ...\n\nKILLER RISKS (if wrong, the company fails):\n1. [Risk] \n   Test: [specific, cheap experiment — how will you know in 30 days?]\n\n2. [Risk]\n   Test: [specific experiment]\n\nKNOWN UNKNOWNS (things we don't know yet):\n- Will [assumption] be true for our users?\n- Can we acquire users for <$[X] via [channel]?\n- Will [platform / partner] allow our model?\n- How will [competitor] respond when we launch?\n\nRISKIEST ASSUMPTION TO TEST FIRST:\n[The single assumption that, if wrong, invalidates the entire business model]",
+  examples:[{b:"Airbnb",t:"Top risk: 'Will strangers trust each other?' Mitigated deliberately: profile photos, two-way reviews, ID verification, host insurance — each feature was a direct, designed response to a named risk."},{b:"Any social network",t:"The cold start problem is a killer risk for every social product. Design a specific test: can you seed a single community of 50 people who engage consistently without you prompting them?"},{b:"Fan platforms",t:"Killer risks to name: (1) not enough creators to attract fans, (2) fans engage but won't pay, (3) Discord or Reddit copies your core mechanic in one sprint. Name all three. Have a test for each."},{b:"YC advice",t:"'What's the thing that would make you abandon this startup?' That's your killer risk. If you can't name it, you haven't thought hard enough about why you might fail."}]},
+
+/* 24 */ {num:"25",isNew:true,title:"Inspiration & References",sub:"What to borrow from — deliberately",
+  why:"The best product builders are avid, deliberate borrowers. Knowing what you admire and exactly why sharpens your design instincts, helps you communicate your vision to designers and engineers, and surfaces emotional references that no market research can find.",
+  prereqs:["10 — Brand Identity","18 — Community & Experience Design"],
+  checklist:["List 5 to 8 products or platforms you admire — and what specifically you admire about each","List 3 to 5 communities that have the feeling you want to create — can be offline","Identify specific features you love elsewhere and want to study and adapt","Find emotional references — films, books, places, events that capture your desired brand feeling","Write your anti-references — what you are deliberately NOT, and why"],
+  template:"PRODUCTS I ADMIRE:\n1. [Product] — specifically: [feature / mechanic / feeling and why it works]\n2. [Product] — specifically: [feature / mechanic / feeling and why it works]\n3. [Product] — specifically: [feature / mechanic / feeling and why it works]\n\nCOMMUNITIES WITH THE RIGHT FEELING (online or offline):\n1. [Community] — because: [what emotional quality it has]\n2. [Community] — because: [what emotional quality it has]\n\nFEATURES TO STUDY AND ADAPT:\n- [Feature from X] — why it works: [reason] — our version: [how we'd adapt it]\n- [Feature from Y] — why it works: [reason] — our version: [how we'd adapt it]\n\nEMOTIONAL REFERENCES (films, books, places, events):\n- [Reference] — captures: [what aspect of the feeling we want to create]\n- [Reference] — captures: [what aspect of the feeling we want to create]\n\nANTI-REFERENCES (what we're deliberately NOT):\n- Not like [platform] — specifically: we'll never [behavior / pattern / tone]\n- Not like [product] — specifically: we'll avoid [mechanic / design choice]",
+  examples:[{b:"Airbnb",t:"Brian Chesky's reference: 'We want Airbnb to feel like a Pixar movie — emotional, warm, about belonging.' That one reference shaped photography style, copy tone, and the entire host program design."},{b:"Fan community refs",t:"Swifties (Easter egg culture + collective lore-building) + Peloton (belonging through shared ritual) + Letterboxd (identity through taste) + a great local bar where everyone knows your name."},{b:"Figma",t:"Dylan Field studied: Google Docs (real-time collaboration), Sketch (clean UI for designers), Abstract (version control). Figma was all three, in the browser. The reference map predicted the product."},{b:"Anti-reference",t:"For a fan platform: anti-reference is Twitter/X — algorithmic, adversarial, public shaming, no community memory, strangers fighting. Write what you'll never be as clearly as what you will be."}]}
+];
+
+// ── State ─────────────────────────────────────
+var openItem=null,openTab={},saveTimers={},LS='fp3_';
+function lsk(i){return LS+i}
+function lload(i){try{return localStorage.getItem(lsk(i))||''}catch(e){return ''}}
+function lsave(i,v){try{localStorage.setItem(lsk(i),v)}catch(e){}}
+function lhas(i){return lload(i).trim().length>0}
+
+// ── Helpers ───────────────────────────────────
+function e(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+var chk='<svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0;margin-top:1px"><circle cx="8" cy="8" r="7.5" stroke="#0F8F6A" stroke-width="1"/><path d="M5 8.2L7 10.2L11 6" stroke="#0F8F6A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+var arr='<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3L5 6L8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+var oksvg='<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5.5" stroke="currentColor"/><path d="M3.5 6.2L5.2 7.9L8.5 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+// ── Render ────────────────────────────────────
+function renderAll(){
+  var h='';
+  PH.forEach(function(ph){
+    h+='<div class="phase"><div class="phase-hdr"><div class="phase-bar" style="background:'+ph.color+'"></div><span class="phase-title" style="color:'+ph.color+'">'+ph.label+'</span><span class="phase-desc">'+ph.desc+'</span></div><div class="grid">';
+    ph.items.forEach(function(i){h+=renderCard(i)});
+    h+='</div>';
+    ph.items.forEach(function(i){if(openItem===i)h+=renderDetail(i)});
+    h+='</div>';
+  });
+  document.getElementById('app').innerHTML=h;
+}
+
+function renderCard(i){
+  var it=IT[i],open=openItem===i,written=lhas(i);
+  return '<div class="card'+(open?' open':'')+'" onclick="tog('+i+')">'
+    +'<div class="cnum">'+it.num+'</div>'
+    +'<div class="ctitle">'+it.title+'</div>'
+    +'<div class="csub">'+it.sub+'</div>'
+    +(it.isNew?'<span class="new-badge">New</span>':'')
+    +'<div class="wdot'+(written?' on':'')+'"></div>'
+    +'<div class="carrow">'+arr+'</div>'
+    +'</div>';
+}
+
+function renderDetail(i){
+  var it=IT[i],tab=openTab[i]||'checklist',saved=lload(i);
+  var pq=it.prereqs.length?'<div class="prereqs">'+it.prereqs.map(function(p){return'<span class="prereq">Requires: '+p+'</span>'}).join('')+'</div>':'';
+  var cl='<ul class="checklist">'+it.checklist.map(function(c){return'<li>'+chk+'<span>'+c+'</span></li>'}).join('')+'</ul>';
+  var ex='<table class="etable"><tbody>'+it.examples.map(function(x){return'<tr><td>'+e(x.b)+'</td><td>'+e(x.t)+'</td></tr>'}).join('')+'</tbody></table>';
+  var tdot=lhas(i)?'<span class="tdot"></span>':'';
+  var tbs=[
+    {id:'checklist',label:'Checklist',cls:''},
+    {id:'template',label:'Template',cls:''},
+    {id:'examples',label:'Brand examples',cls:''},
+    {id:'yours',label:'Your version',cls:' yours',extra:tdot}
+  ].map(function(t){
+    return'<button class="tbtn'+(tab===t.id?' on':'')+(t.cls)+'" onclick="stab('+i+',\''+t.id+'\')">'+t.label+(t.extra||'')+'</button>'
+  }).join('');
+  var yc='<div class="yours-hdr"><div><div class="yours-label">Your version</div><div class="yours-hint">Write your own answer for <strong>'+it.title+'</strong> — edit the template to fit your startup.</div></div>'
+    +'<div class="yours-btns"><button class="abtn" onclick="loadTpl('+i+')">Load template</button><button class="abtn" onclick="clr('+i+')">Clear</button><button class="abtn pri" onclick="cp('+i+')">Copy text</button></div></div>'
+    +'<textarea class="yta" id="ta'+i+'" placeholder="Start writing here, or click Load template to begin from the template..." oninput="inp('+i+')" onblur="snap('+i+')">'+e(saved)+'</textarea>'
+    +'<div class="sstatus" id="ss'+i+'"></div>';
+  return'<div class="detail">'
+    +'<div class="dhead"><div class="dnum">'+it.num+'</div><div><div class="dtitle">'+it.title+'</div><div class="dwhy">'+it.why+'</div>'+pq+'</div></div>'
+    +'<div class="tabs">'+tbs+'</div>'
+    +'<div class="panel'+(tab==='checklist'?' on':'')+'" id="pc'+i+'">'+cl+'</div>'
+    +'<div class="panel'+(tab==='template'?' on':'')+'" id="pt'+i+'"><div class="tlabel">Fill-in-the-blank template</div><div class="tbox">'+e(it.template)+'</div></div>'
+    +'<div class="panel'+(tab==='examples'?' on':'')+'" id="pe'+i+'">'+ex+'</div>'
+    +'<div class="panel'+(tab==='yours'?' on':'')+'" id="py'+i+'">'+yc+'</div>'
+    +'</div>';
+}
+
+// ── Actions ───────────────────────────────────
+function tog(i){
+  if(openItem===i){openItem=null}else{openItem=i;if(!openTab[i])openTab[i]='checklist'}
+  renderAll();
+  if(openItem!==null)setTimeout(function(){var ps=document.querySelectorAll('.detail');if(ps.length)ps[ps.length-1].scrollIntoView({behavior:'smooth',block:'nearest'})},60);
+}
+function stab(i,t){
+  var ta=document.getElementById('ta'+i);if(ta)lsave(i,ta.value);
+  openTab[i]=t;renderAll();
+  setTimeout(function(){var ps=document.querySelectorAll('.detail');if(ps.length)ps[ps.length-1].scrollIntoView({behavior:'smooth',block:'nearest'})},30);
+}
+function inp(i){
+  if(saveTimers[i])clearTimeout(saveTimers[i]);
+  saveTimers[i]=setTimeout(function(){snap(i)},900);
+  var ss=document.getElementById('ss'+i);if(ss){ss.className='sstatus';ss.innerHTML='Unsaved changes…'}
+}
+function snap(i){
+  var ta=document.getElementById('ta'+i);if(!ta)return;
+  lsave(i,ta.value);
+  var ss=document.getElementById('ss'+i);
+  if(ss){ss.className='sstatus saved';ss.innerHTML=oksvg+' &nbsp;Saved';setTimeout(function(){if(ss){ss.className='sstatus';ss.innerHTML=''}},2200)}
+}
+function loadTpl(i){
+  var ta=document.getElementById('ta'+i);if(!ta)return;
+  if(ta.value.trim()&&!confirm('Replace your current text with the template?'))return;
+  ta.value=IT[i].template;ta.focus();inp(i);
+}
+function clr(i){
+  var ta=document.getElementById('ta'+i);if(!ta)return;
+  if(ta.value.trim()&&!confirm('Clear your text for '+IT[i].title+'?'))return;
+  ta.value='';lsave(i,'');
+  var ss=document.getElementById('ss'+i);if(ss){ss.className='sstatus';ss.innerHTML='Cleared.';setTimeout(function(){if(ss)ss.innerHTML=''},1500)}
+}
+function cp(i){
+  var ta=document.getElementById('ta'+i);
+  if(!ta||!ta.value.trim()){alert('Nothing to copy yet — write something in Your Version first.');return}
+  var ss=document.getElementById('ss'+i);
+  function done(){if(ss){ss.className='sstatus copied';ss.innerHTML=oksvg+' &nbsp;Copied to clipboard';setTimeout(function(){if(ss){ss.innerHTML='';ss.className='sstatus'}},2200)}}
+  try{navigator.clipboard.writeText(ta.value).then(done)}
+  catch(err){ta.select();try{document.execCommand('copy');done()}catch(e2){alert('Copy failed — please select the text manually.')}}
+}
+renderAll();
+</script>
+</body>
+</html>
