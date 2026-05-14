@@ -69,7 +69,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text-primary);line
 .checklist li{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;color:var(--text-secondary);line-height:1.5}
 .checklist li:last-child{border-bottom:none}
 .tlabel{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--text-tertiary);margin-bottom:8px}
-.tbox{background:#F4F4FB;border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius-sm);padding:14px 16px;font-family:var(--mono);font-size:12px;color:var(--text-primary);line-height:1.8;white-space:pre-wrap;word-break:break-word}
+.tbox{background:#F4F4FB;border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius-sm);padding:14px 16px;font-family:var(--font);font-size:13px;color:var(--text-primary);line-height:1.9;white-space:pre-wrap;word-break:break-word}
 .etable{width:100%;border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;border-collapse:collapse}
 .etable tr{border-bottom:1px solid var(--border)}
 .etable tr:last-child{border-bottom:none}
@@ -85,7 +85,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text-primary);line
 .abtn:hover{background:var(--bg);border-color:var(--border-strong);color:var(--text-primary)}
 .abtn.pri{background:var(--yoursbg);color:var(--yours);border-color:var(--yoursbd)}
 .abtn.pri:hover{background:#d4eaf8}
-.yta{width:100%;min-height:260px;padding:14px 16px;font-family:var(--mono);font-size:12.5px;line-height:1.8;color:var(--text-primary);background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-sm);resize:vertical;transition:border-color .15s,box-shadow .15s;outline:none}
+.yta{width:100%;min-height:260px;padding:14px 16px;font-family:var(--font);font-size:13.5px;line-height:1.9;color:var(--text-primary);background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-sm);resize:vertical;transition:border-color .15s,box-shadow .15s;outline:none}
 .yta:focus{border-color:var(--yours);box-shadow:0 0 0 3px rgba(26,111,168,.1)}
 .yta::placeholder{color:var(--text-tertiary)}
 .sstatus{display:flex;align-items:center;gap:6px;margin-top:8px;font-size:11px;color:var(--text-tertiary);min-height:18px}
@@ -350,7 +350,7 @@ function renderDetail(i){
     return'<button class="tbtn'+(tab===t.id?' on':'')+(t.cls)+'" onclick="stab('+i+',\''+t.id+'\')">'+t.label+(t.extra||'')+'</button>'
   }).join('');
   var yc='<div class="yours-hdr"><div><div class="yours-label">Your version</div><div class="yours-hint">Write your own answer for <strong>'+it.title+'</strong> — edit the template to fit your startup.</div></div>'
-    +'<div class="yours-btns"><button class="abtn" onclick="loadTpl('+i+')">Load template</button><button class="abtn" onclick="clr('+i+')">Clear</button><button class="abtn pri" onclick="cp('+i+')">Copy text</button></div></div>'
+    +'<div class="yours-btns"><button class="abtn" onclick="loadTpl('+i+')">Load template</button><button class="abtn pri" onclick="cp('+i+')">Copy text</button></div></div>'
     +'<textarea class="yta" id="ta'+i+'" placeholder="Start writing here, or click Load template to begin from the template..." oninput="inp('+i+')" onblur="snap('+i+')">'+e(saved)+'</textarea>'
     +'<div class="sstatus" id="ss'+i+'"></div>';
   return'<div class="detail">'
